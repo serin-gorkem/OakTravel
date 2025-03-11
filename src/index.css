@@ -1,1 +1,21 @@
 @import "tailwindcss";
+@theme{
+    --color-main: #FFA801;
+    --color-dark: #1E272E;
+    --color-secondary: #EFEFEF;
+    --color-white: #FFFFFF;
+    --color-gray: #B9B9B9;
+    --font-heading: Merriweather, "serif";
+    --font-paragraph: WorkSans, "sans-serif";
+}
+@layer base{
+    body{
+        background-color: var(--color-secondary);
+    }
+}
+@font-face {
+    font-family: Merriweather;
+    src: url("../src/assets//fonts/Merriweather-Bold.ttf");
+    font-family: WorkSans;
+    src: url("../src/assets//fonts/WorkSans-Regular.ttf");
+}
