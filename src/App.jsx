@@ -1,10 +1,7 @@
-
-import Home from "./sections/Home"
+import Home from "./sections/Home";
 
 function App() {
-  return (
-    <Home/>
-  )
+  return <Home />;
 }
 
-export default App
+export default App;

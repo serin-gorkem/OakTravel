@@ -1,6 +1,6 @@
 function Nav() {
   return (
-    <nav className=" p-2 flex flex-col gap-4">
+    <nav className=" p-2 flex flex-col gap-4 z-10 lg:max-w-9/12 w-full mx-auto">
       <ul className=" flex justify-between items-center">
         <li>
           <p className=" font-heading text-white text-xl">OAK TRAVEL</p>
