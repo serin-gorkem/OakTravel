@@ -3,7 +3,7 @@ function Form() {
   return (
     <form className="bg-base-300 w-full rounded-box p-5 flex flex-col justify-between h-fit gap-3 shadow-xl ">
       <fieldset className="flex gap-3 w-fit">
-        <input type="checkbox" className="toggle"></input>
+        <input type="checkbox" className="toggle" aria-label="add return trip"></input>
         <p>I want a return transfer.</p>
       </fieldset>
       <fieldset className="fieldset ">
@@ -13,19 +13,19 @@ function Form() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             class="size-6"
             className="w-6 opacity-80"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
             />
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
             />
           </svg>
@@ -39,19 +39,19 @@ function Form() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             class="size-6"
             className="w-6 opacity-80"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
             />
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
             />
           </svg>
@@ -60,11 +60,12 @@ function Form() {
       </fieldset>
       <fieldset className="fieldset flex">
         <legend className="font-semibold text-sm">
-          Departure Date and Time
+          Pickup Date and Time
         </legend>
         <input
           type="datetime-local"
           className="input focus-within:outline-0 w-full"
+          aria-label="Select pickup date and time"
           min={today}
         />
       </fieldset>
