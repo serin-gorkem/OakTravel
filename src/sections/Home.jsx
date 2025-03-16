@@ -23,7 +23,7 @@ function Home() {
   const stars = Array.from({ length: 5 }, () => star);
 
   return (
-    <section className="h-screen flex flex-col relative xl:gap-20">
+    <section className="h-screen flex flex-col relative sm:gap-5 ">
       <Nav />
       <div
         className="bg-[url(./assets/img/Home-BG.webp)] absolute w-full bg-center bg-cover brightness-30 h-11/12"
@@ -31,14 +31,14 @@ function Home() {
       ></div>
       <article
         id="above-the-fold"
-        className="p-2 md:px-8 xl:px-0 flex flex-col xl:flex-row gap-4 z-10 lg:max-w-9/12 mx-auto"
+        className="p-2 md:px-4 lg:px-0 flex flex-col lg:flex-row xl:pt-10 gap-4 z-10 lg:max-w-10/12 mx-auto"
       >
-        <div className="flex flex-col gap-4">
-          <h1 className="font-heading font-bold tracking-tight leading-snug text-2xl sm:w-11/12 sm:text-4xl xl:text-5xl text-base-100">
+        <div className="flex flex-col w-fit h-96 gap-4">
+          <h1 className="font-heading font-bold tracking-tight leading-snug text-2xl sm:w-full lg:leading-tight lg:w-fit xl:w-7/12 sm:text-4xl xl:text-6xl text-base-100">
             Reliable <span className=" text-warning ">Airport Transport. </span>
             Comfort & Punctuality with Oak Travel.
           </h1>
-          <h2 className="font-paragraph text-xs font-light text-white opacity-90 sm:w-11/12 sm:text-sm xl:text-xl xl:w-9/12 w-fit leading-relaxed tracking-tighter">
+          <h2 className="font-paragraph xl:pb-8 text-xs font-light text-white opacity-90 sm:w-full sm:text-sm xl:text-xl xl:w-8/12 w-fit leading-relaxed tracking-tighter">
             Experience stress-free airport transfers with Oak Travel. Whether
             you're heading to or from the airport, we provide safe, comfortable,
             and on-time rides tailored to your needs. Choose from luxury,

@@ -1,30 +1,25 @@
 import { useState } from "react";
 
 function Nav() {
-  const [selectedCurrency, setSelectedCurrency] = useState(currencyList[0]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  return (
+    <>
+      <MobileNav
+      />
+      <DesktopNav
+      />
+    </>
+  );
+}
 
-  function changeCurrency(currency) {
-    setSelectedCurrency(currency);
-  }
+function MobileNav() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function toggleMenu(bool) {
     setIsMenuOpen(bool);
   }
 
-  const renderCurrencyList = currencyList.map((currency) => (
-    <li
-      key={currency.id}
-      className="w-full"
-      onClick={() => changeCurrency(currency)}
-    >
-      <a className="flex p-0 py-2 justify-center items-center">
-        {currency.svg}
-      </a>
-    </li>
-  ));
   return (
-    <nav className="flex md:px-8 xl:px-0 flex-col gap-2 z-20 lg:max-w-9/12 w-full mx-auto">
+    <nav className="flex flex-col gap-2 z-20 ">
       {isMenuOpen ? (
         <div className="h-96 bg-base-100 flex flex-col sm:hidden">
           <ul className=" p-2 flex justify-between items-center">
@@ -34,15 +29,6 @@ function Nav() {
               </a>
             </li>
             <li className="flex items-center gap-4">
-              <details className="dropdown">
-                <summary className="flex">
-                  {/* Currency Icon */}
-                  {selectedCurrency.svg}
-                </summary>
-                <ul className="menu dropdown-content mt-2 bg-base-100 right-1/2 left-1/2 -translate-x-1/2 rounded-box w-16 flex justify-center items-center shadow-sm">
-                  {renderCurrencyList}
-                </ul>
-              </details>
               {/* Whatsapp Icon */}
               <a href="https://api.whatsapp.com/send?phone=905540161923">
                 <svg
@@ -69,53 +55,44 @@ function Nav() {
               </a>
               {/* Close Icon */}
               <div onClick={() => toggleMenu(false)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
               </div>
             </li>
           </ul>
           <div className=" bg-base-300 h-11/12 m-2 p-4">
-            <ul className="flex flex-col h-full justify-between">
-              {menuItem("Booking")}
-              {menuItem("Who we are")}
-              {menuItem("Our Vehicles")}
-              {menuItem("Reviews")}
-              {menuItem("FAQ")}
-              {menuItem("How to book your ride")}
-              {menuItem("Contact")}
+            <ul className="flex flex-col h-full justify-between text-primary">
+              {menuItem("Booking", "#")}
+              {menuItem("Who we are", "#")}
+              {menuItem("Our Vehicles", "#")}
+              {menuItem("Reviews", "#")}
+              {menuItem("FAQ", "#")}
+              {menuItem("How to book your ride", "#")}
+              {menuItem("Contact", "#")}
             </ul>
           </div>
-        </div>  
+        </div>
       ) : (
-        <>
-          <ul className=" p-2 md:px-0 flex justify-between items-center">
+        <div className=" sm:hidden ">
+          <ul className="p-2 flex justify-between items-center">
             <li>
               <a href="#">
                 <p className=" font-heading text-white text-xl">OAK TRAVEL</p>
               </a>
             </li>
             <li className="flex items-center gap-4">
-              <details className="dropdown">
-                <summary className="flex">
-                  {/* Currency Icon */}
-                  {selectedCurrency.svg}
-                </summary>
-                <ul className="menu dropdown-content mt-2 bg-base-100 right-1/2 left-1/2 -translate-x-1/2 rounded-box w-16 flex justify-center items-center shadow-sm">
-                  {renderCurrencyList}
-                </ul>
-              </details>
               {/* Whatsapp Icon */}
               <a href="https://api.whatsapp.com/send?phone=905540161923">
                 <svg
@@ -159,90 +136,46 @@ function Nav() {
               </div>
             </li>
           </ul>
-          <hr className=" text-white"></hr>
-        </>
+          <hr className="mx-2 text-white"></hr>
+        </div>
       )}
     </nav>
   );
 }
-
-function menuItem(text) {
+function DesktopNav() {
   return (
-    <li>
-      <a href="#">
-        <p className=" font-heading text-primary text-xl hover:text-warning">
-          {text}
-        </p>
-      </a>
+    <nav className="hidden sm:flex sm:flex-col items-center z-20 gap-6 w-full lg:px-0 sm:px-4 lg:max-w-10/12 mx-auto ">
+      <ul className="flex justify-between w-full">
+        <li>
+          <a href="#">
+            <h1 className="text-base-100 text-4xl ">OAK TRAVEL</h1>
+          </a>
+        </li>
+        <li className="flex items-center gap-4 w-fit cursor-pointer">
+          <button className="btn w-36 hover:bg-warning hover:border-warning">Book Now</button>
+        </li>
+      </ul>
+      <div className="flex flex-col items-center w-full gap-3">
+        <hr className="w-full text-base-100"></hr>
+        <ul className="text-base-100 flex justify-evenly w-full">
+          {menuItem("Booking", "#")}
+          {menuItem("Who we are", "#")}
+          {menuItem("Our Vehicles", "#")}
+          {menuItem("Reviews", "#")}
+          {menuItem("FAQ", "#")}
+          {menuItem("How to book your ride", "#")}
+          {menuItem("Contact", "#")}
+        </ul>
+        <hr className="w-full text-base-100"></hr>
+      </div>
+    </nav>
+  );
+}
+function menuItem(text, link) {
+  return (
+    <li className="font-heading text-xl active:text-warning hover:text-warning">
+      <a href={link}>{text}</a>
     </li>
   );
 }
-
-const currencyList = [
-  {
-    id: "0",
-    svg: (
-      <svg
-        fill="#1E272E"
-        version="1.1"
-        id="Layer_1"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 440 440"
-        xmlSpace="preserve"
-        stroke="#1E272E"
-        className="h-8 aspect-square p-2 bg-white rounded-full"
-      >
-        <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <path d="M344.33,212.5c0,103.857-80.577,189.248-182.5,196.936V197.361l151.76-55.236l-10.26-28.191l-141.5,51.502V121.38 l151.76-55.236l-10.26-28.191l-141.5,51.502V0h-30v100.374l-66.16,24.08l10.261,28.191L131.83,132.3v44.055l-66.16,24.08 l10.261,28.191l55.899-20.346V440h15c60.813,0,117.957-23.651,160.902-66.597c42.946-42.946,66.598-100.089,66.598-160.903H344.33z"></path>{" "}
-        </g>
-      </svg>
-    ),
-  },
-  {
-    id: "1",
-    svg: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="h-8 aspect-square p-1 bg-white rounded-full"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        />
-      </svg>
-    ),
-  },
-  {
-    id: "2",
-    svg: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="h-8 aspect-square p-1 bg-white rounded-full"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M14.121 7.629A3 3 0 0 0 9.017 9.43c-.023.212-.002.425.028.636l.506 3.541a4.5 4.5 0 0 1-.43 2.65L9 16.5l1.539-.513a2.25 2.25 0 0 1 1.422 0l.655.218a2.25 2.25 0 0 0 1.718-.122L15 15.75M8.25 12H12m9 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        />
-      </svg>
-    ),
-  },
-];
-
 export default Nav;

@@ -1,10 +1,9 @@
-import Home from "./sections/Home";
+import Landing from "./sections/Landing"
 
 function App() {
   return (
     <>
-      <Home />
-      <section className="h-screen"></section>
+      <Landing/>
     </>
   );
 }
