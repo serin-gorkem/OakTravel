@@ -1,5 +1,6 @@
 import { lazy, memo, Suspense, useEffect } from "react";
 const Home = lazy(() => import("./Home"));
+const Nav = lazy(() => import("../components/Nav"));
 
 const Landing = memo(function Landing() {
   useEffect(() => {
@@ -14,7 +15,11 @@ const Landing = memo(function Landing() {
       }
     >
       <Home />
-      <section className="h-screen"></section>
+        <Nav isPageNav={true} />
+      <section className="h-screen mt-16">
+      </section>
+      <section className="h-screen bg-amber-900">
+      </section>
     </Suspense>
   );
 });

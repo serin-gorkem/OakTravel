@@ -1,7 +1,8 @@
-import Nav from "../components/Nav";
-import Tripadvisor from "../assets/img/Tripadvisor-Logo.png";
-import Form from "../components/Form";
+import { lazy } from "react";
 
+const Nav = lazy(() => import("../components/Nav"));
+const Form = lazy(() => import("../components/Form"));
+import Tripadvisor from "../assets/img/Tripadvisor-Logo.png"
 function Home() {
   const star = (
     <svg
@@ -23,36 +24,36 @@ function Home() {
   const stars = Array.from({ length: 5 }, () => star);
 
   return (
-    <section className="h-screen flex flex-col relative sm:gap-5 ">
+    <section className="h-fit flex flex-col relative sm:gap-5 ">
       <Nav />
-      <div
+      <img
         className="bg-[url(./assets/img/Home-BG.webp)] absolute w-full bg-center bg-cover brightness-30 h-11/12"
         alt="backgroundImage"
-      ></div>
+      ></img>
       <article
         id="above-the-fold"
-        className="p-2 md:px-4 lg:px-0 flex flex-col lg:flex-row xl:pt-10 gap-4 z-10 lg:max-w-10/12 mx-auto"
+        className="p-2 md:px-4 lg:px-0 flex flex-col lg:flex-row  gap-4 z-10 lg:max-w-10/12 mx-auto"
       >
-        <div className="flex flex-col w-fit h-96 gap-4">
-          <h1 className="font-heading font-bold tracking-tight leading-snug text-2xl sm:w-full lg:leading-tight lg:w-fit xl:w-7/12 sm:text-4xl xl:text-6xl text-base-100">
+        <div className="flex flex-col w-fit xl:h-96 gap-4">
+          <h1 className="font-heading font-bold tracking-tight leading-snug text-2xl sm:w-full lg:leading-tight lg:w-fit xl:w-7/12 sm:text-4xl xl:text-4xl text-base-100">
             Reliable <span className=" text-warning ">Airport Transport. </span>
             Comfort & Punctuality with Oak Travel.
           </h1>
-          <h2 className="font-paragraph xl:pb-8 text-xs font-light text-white opacity-90 sm:w-full sm:text-sm xl:text-xl xl:w-8/12 w-fit leading-relaxed tracking-tighter">
+          <h2 className="font-paragraph xl:pb-8 text-xs font-light text-white opacity-80 sm:w-full sm:text-sm xl:text-base xl:w-8/12 w-fit leading-relaxed tracking-tighter">
             Experience stress-free airport transfers with Oak Travel. Whether
             you're heading to or from the airport, we provide safe, comfortable,
             and on-time rides tailored to your needs. Choose from luxury,
             business, or economy vehicles, enjoy transparent pricing, and rely
             on our professional drivers for a seamless journey.
           </h2>
-          <button className="btn btn-md lg:btn-lg xl:btn-xl w-fit font-paragraph self-baseline">
+          <button className="btn btn-md lg:btn-lg hover:bg-warning hover:border-warning hover:shadow-none w-fit font-paragraph font-light self-baseline">
             How to book your ride
           </button>
         </div>
         <div className="relative sm:max-w-96 w-full">
           <Form />
-          <div className="absolute bg-base-300 rounded-box h-16 w-10/12 left-1/2 -translate-x-1/2 -bottom-13 pt-2 px-2 -z-10 flex justify-between items-center">
-            <img src={Tripadvisor} alt="tripadvisor logo" className="w-1/2 bg-cover bg-center"></img>
+          <div className="absolute bg-base-300 rounded-box shadow-xl h-16 w-10/12 left-1/2 -translate-x-1/2 -bottom-13 pt-2 px-2 -z-10 flex justify-between items-center">
+            <img src={Tripadvisor} alt="tripadvisor logo" loading="lazy" width={64} height={64} className="w-1/2 bg-cover bg-center"></img>
             <div className="flex">{stars}</div>
           </div>
         </div>

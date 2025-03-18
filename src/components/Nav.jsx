@@ -1,13 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Nav() {
+function Nav(props) {
   return (
     <>
-      <MobileNav
-      />
-      <DesktopNav
-      />
+      {props.isPageNav ? (
+        <PageNav />
+      ) : (
+        <>
+          <MobileNav />
+          <DesktopNav />
+        </>
+      )}
     </>
+  );
+}
+
+function PageNav() {
+  // const [show,setShow] = useState(false);
+  // const [lastScrollY,setLastScrollY] = useState(0);
+
+  // const controlNavbar = () => {
+  //   if(window.screenY > lastScrollY){
+  //     setShow(false)
+  //   }else{
+  //     setShow(true)
+  //   }
+
+  //   setLastScrollY(window.scrollY);
+  // }
+
+  // useEffect( () =>{
+  //   window.addEventListener("scroll", controlNavbar);
+  //   return () => window.removeEventListener("scroll", controlNavbar);
+  // },[lastScrollY])
+
+  // console.log(window.screenY);
+  return (
+      <nav className={`px-2 p-4 sticky top-0 lg:max-w-10/12 mx-auto z-20 my-16`}>
+      <ul className="flex justify-between w-full">
+        <li>
+          <a href="#">
+            <h1 className="text-primary text-xl ">OAK TRAVEL</h1>
+          </a>
+        </li>
+        <li className="flex items-center gap-4 w-fit cursor-pointer">
+          <button className="btn btn-primary w-36 hover:bg-warning hover:border-warning">
+            Book Now
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
@@ -148,11 +190,13 @@ function DesktopNav() {
       <ul className="flex justify-between w-full">
         <li>
           <a href="#">
-            <h1 className="text-base-100 text-4xl ">OAK TRAVEL</h1>
+            <h1 className="text-base-100 text-3xl ">OAK TRAVEL</h1>
           </a>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-          <button className="btn w-36 hover:bg-warning hover:border-warning">Book Now</button>
+          <button className="btn w-36 hover:bg-warning hover:border-warning">
+            Book Now
+          </button>
         </li>
       </ul>
       <div className="flex flex-col items-center w-full gap-3">
