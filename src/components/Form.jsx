@@ -1,9 +1,41 @@
+import { useEffect, useState } from "react";
+
 function Form() {
   const today = new Date().toLocaleString("EN-CA").slice(0, 10) + "T00:00";
+  const [fromLocation, setFromLocation] = useState("");
+  
+  let autocomplete;
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById("autocomplete"),
+      {
+        types: ["airport"],
+        componentRestrictions: { country: "tr" },
+        fields: ["place_id", "geometry", "name"],
+      }
+    );  
+    autocomplete.addListener("place_changed", fillInAddress);
+  }
+  function fillInAddress() {
+    var place = autocomplete.getPlace();
+    setFromLocation(autocomplete.getPlace());
+
+    if (!place.geometry) {
+      document.getElementById("autocomplete").placeholder = "Enter a place";
+    }
+  }
+  useEffect(() => {
+    initAutocomplete();
+  })
+
   return (
     <form className="bg-base-300 w-full rounded-box p-5 flex flex-col justify-between h-fit gap-3 shadow-xl ">
       <fieldset className="flex gap-3 w-fit">
-        <input type="checkbox" className="toggle" aria-label="add return trip"></input>
+        <input
+          type="checkbox"
+          className="toggle"
+          aria-label="add return trip"
+        ></input>
         <p>I want a return transfer.</p>
       </fieldset>
       <fieldset className="fieldset ">
@@ -29,7 +61,11 @@ function Form() {
               d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
             />
           </svg>
-          <input type="text" placeholder="Address,airport,hotel..." />
+          <input
+            type="text"
+            id="autocomplete"
+            placeholder="Address,airport,hotel..."
+          />
         </label>
       </fieldset>
       <fieldset className="fieldset ">
@@ -59,9 +95,7 @@ function Form() {
         </label>
       </fieldset>
       <fieldset className="fieldset flex">
-        <legend className="font-semibold text-sm">
-          Pickup Date and Time
-        </legend>
+        <legend className="font-semibold text-sm">Pickup Date and Time</legend>
         <input
           type="datetime-local"
           className="input focus-within:outline-0 w-full"

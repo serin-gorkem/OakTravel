@@ -2,8 +2,9 @@ import { lazy } from "react";
 
 const Nav = lazy(() => import("../components/Nav"));
 const Form = lazy(() => import("../components/Form"));
-import Tripadvisor from "../assets/img/Tripadvisor-Logo.png"
+import Tripadvisor from "../assets/img/Tripadvisor-Logo.png";
 function Home() {
+
   const star = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +54,14 @@ function Home() {
         <div className="relative sm:max-w-96 w-full">
           <Form />
           <div className="absolute bg-base-300 rounded-box shadow-xl h-16 w-10/12 left-1/2 -translate-x-1/2 -bottom-13 pt-2 px-2 -z-10 flex justify-between items-center">
-            <img src={Tripadvisor} alt="tripadvisor logo" loading="lazy" width={64} height={64} className="w-1/2 bg-cover bg-center"></img>
+            <img
+              src={Tripadvisor}
+              alt="tripadvisor logo"
+              loading="lazy"
+              width={64}
+              height={64}
+              className="w-1/2 bg-cover bg-center"
+            ></img>
             <div className="flex">{stars}</div>
           </div>
         </div>
