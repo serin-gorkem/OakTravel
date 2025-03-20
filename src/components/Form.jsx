@@ -1,33 +1,8 @@
-import { useEffect, useState } from "react";
+import { memo } from "react";
 
-function Form() {
+
+const Form = memo(function(){
   const today = new Date().toLocaleString("EN-CA").slice(0, 10) + "T00:00";
-  const [fromLocation, setFromLocation] = useState("");
-  
-  let autocomplete;
-  function initAutocomplete() {
-    autocomplete = new google.maps.places.Autocomplete(
-      document.getElementById("autocomplete"),
-      {
-        types: ["airport"],
-        componentRestrictions: { country: "tr" },
-        fields: ["place_id", "geometry", "name"],
-      }
-    );  
-    autocomplete.addListener("place_changed", fillInAddress);
-  }
-  function fillInAddress() {
-    var place = autocomplete.getPlace();
-    setFromLocation(autocomplete.getPlace());
-
-    if (!place.geometry) {
-      document.getElementById("autocomplete").placeholder = "Enter a place";
-    }
-  }
-  useEffect(() => {
-    initAutocomplete();
-  })
-
   return (
     <form className="bg-base-300 w-full rounded-box p-5 flex flex-col justify-between h-fit gap-3 shadow-xl ">
       <fieldset className="flex gap-3 w-fit">
@@ -47,7 +22,6 @@ function Form() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="size-6"
             className="w-6 opacity-80"
           >
             <path
@@ -77,7 +51,6 @@ function Form() {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            class="size-6"
             className="w-6 opacity-80"
           >
             <path
@@ -119,6 +92,5 @@ function Form() {
       </button>
     </form>
   );
-}
-
+})
 export default Form;

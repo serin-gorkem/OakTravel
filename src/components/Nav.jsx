@@ -72,7 +72,7 @@ function MobileNav() {
             </li>
             <li className="flex items-center gap-4">
               {/* Whatsapp Icon */}
-              <a href="https://api.whatsapp.com/send?phone=905540161923">
+              <a href="https://api.whatsapp.com/send?phone=905540161923" aria-label="whatsapp link"  >
                 <svg
                   viewBox="0 0 24 24"
                   className="h-8 aspect-square p-1.5 bg-white rounded-full"
@@ -136,7 +136,7 @@ function MobileNav() {
             </li>
             <li className="flex items-center gap-4">
               {/* Whatsapp Icon */}
-              <a href="https://api.whatsapp.com/send?phone=905540161923">
+              <a href="https://api.whatsapp.com/send?phone=905540161923" aria-label="whatsapp link">
                 <svg
                   viewBox="0 0 24 24"
                   className="h-8 aspect-square p-1.5 bg-white rounded-full"

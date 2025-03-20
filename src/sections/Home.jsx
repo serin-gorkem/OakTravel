@@ -1,10 +1,8 @@
-import { lazy } from "react";
-
+import { lazy, memo } from "react";
+import Tripadvisor from "../assets/img/Tripadvisor-Logo.webp";
 const Nav = lazy(() => import("../components/Nav"));
 const Form = lazy(() => import("../components/Form"));
-import Tripadvisor from "../assets/img/Tripadvisor-Logo.png";
-function Home() {
-
+const Home = memo(function () {
   const star = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,15 +20,18 @@ function Home() {
     </svg>
   );
 
-  const stars = Array.from({ length: 5 }, () => star);
+  let stars = Array(5).fill(star)
+  const starList = stars.map((element, index) => {
+    return <div key={index}>{element}</div>;
+  });
 
   return (
-    <section className="h-fit flex flex-col relative sm:gap-5 ">
+    <section className="h-screen lg:mb-0 md:mb-40 xl:m-0  border-red-500 flex flex-col relative sm:gap-5">
       <Nav />
-      <img
-        className="bg-[url(./assets/img/Home-BG.webp)] absolute w-full bg-center bg-cover brightness-30 h-11/12"
+      <div
+        className="bg-[url(./assets/img/Home_bg.webp)] absolute w-full bg-center bg-cover brightness-30 h-11/12"
         alt="backgroundImage"
-      ></img>
+      ></div>
       <article
         id="above-the-fold"
         className="p-2 md:px-4 lg:px-0 flex flex-col lg:flex-row  gap-4 z-10 lg:max-w-10/12 mx-auto"
@@ -62,12 +63,12 @@ function Home() {
               height={64}
               className="w-1/2 bg-cover bg-center"
             ></img>
-            <div className="flex">{stars}</div>
+            <div className="flex">{starList}</div>
           </div>
         </div>
       </article>
     </section>
   );
-}
+});
 
 export default Home;

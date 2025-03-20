@@ -1,25 +1,27 @@
-import { lazy, memo, Suspense, useEffect } from "react";
+import { lazy, memo, Suspense } from "react";
 const Home = lazy(() => import("./Home"));
 const ChooseUs = lazy(() => import("./ChooseUs"));
 const Nav = lazy(() => import("../components/Nav"));
+const About = lazy(() => import("./About"));
+const PageDivider = lazy(() => import("../components/PageDivider"));
+
 
 const Landing = memo(function Landing() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
   return (
     <Suspense
       fallback={
-        <h1 className="flex justify-center text-text-white items-center h-screen">
-          Loading...
-        </h1>
+        <div className="flex flex-col justify-between items-center">
+          <span className="loading loading-spinner loading-xl w-fit"></span>
+        </div>
       }
     >
       <Home />
-        {/* <Nav isPageNav={true} /> */}
-        <ChooseUs/>
-      <section className="h-screen bg-amber-900">
-      </section>
+      {/* <Nav isPageNav={true} /> */}
+      <PageDivider/>
+      <ChooseUs />
+      <PageDivider/>
+      <About />
+      <PageDivider/>
     </Suspense>
   );
 });

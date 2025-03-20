@@ -44,6 +44,10 @@
 @layer base {
     body {
         font-family: "WorkSans", sans-serif;
+        background-color: oklch(95% 0 0);
+    }
+    html{
+        background-color: oklch(95% 0 0) !important;
     }
 }
 
