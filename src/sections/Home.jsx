@@ -40,7 +40,7 @@ const Home = memo(function () {
       >
         <div className="flex flex-col w-fit xl:h-96 gap-4">
           <h1 className="font-heading font-bold tracking-tight leading-snug text-2xl sm:w-full lg:leading-tight lg:w-fit xl:w-7/12 sm:text-4xl xl:text-4xl text-base-100">
-            Reliable <span className=" text-warning ">Airport Transport.</span>
+            Reliable <span className=" text-warning ">Airport Transport. </span>
             Comfort & Punctuality with Oak Travel.
           </h1>
           <h2 className="font-paragraph xl:pb-8 text-xs font-light text-white opacity-80 sm:w-full sm:text-sm xl:text-base xl:w-8/12 w-fit leading-relaxed tracking-tighter">
