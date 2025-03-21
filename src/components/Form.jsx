@@ -8,7 +8,7 @@ const Form = memo(function(){
       <fieldset className="flex gap-3 w-fit">
         <input
           type="checkbox"
-          className="toggle"
+          className="toggle checked:text-warning"
           aria-label="add return trip"
         ></input>
         <p>I want a return transfer.</p>
@@ -87,7 +87,7 @@ const Form = memo(function(){
           title="Passenger Count"
         />
       </fieldset>
-      <button type="submit" className="btn btn-primary w-full">
+      <button type="submit" className="btn btn-primary w-full hover:bg-white hover:text-primary">
         Search
       </button>
     </form>

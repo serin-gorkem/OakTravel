@@ -36,7 +36,7 @@ function PageNav() {
 
   // console.log(window.screenY);
   return (
-      <nav className={`px-2 p-4 sticky top-0 lg:max-w-10/12 mx-auto z-20 my-16`}>
+      <nav className={`px-2 p-4 sticky top-0 lg:max-w-9/12 mx-auto z-20 my-16`}>
       <ul className="flex justify-between w-full">
         <li>
           <a href="#">
@@ -186,11 +186,11 @@ function MobileNav() {
 }
 function DesktopNav() {
   return (
-    <nav className="hidden sm:flex sm:flex-col items-center z-20 gap-6 w-full lg:px-0 sm:px-4 lg:max-w-10/12 mx-auto ">
+    <nav className="hidden sm:flex sm:flex-col items-center z-20 gap-6 w-full lg:px-0 sm:px-4 lg:max-w-9/12 mx-auto ">
       <ul className="flex justify-between w-full">
         <li>
           <a href="#">
-            <h1 className="text-base-100 text-3xl ">OAK TRAVEL</h1>
+            <h1 className="text-base-100 text-3xl hover:text-warning transition-all ">OAK TRAVEL</h1>
           </a>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
@@ -217,7 +217,7 @@ function DesktopNav() {
 }
 function menuItem(text, link) {
   return (
-    <li className="font-heading text-xl active:text-warning hover:text-warning">
+    <li className="font-heading transition-all text-xl active:text-warning hover:text-warning">
       <a href={link}>{text}</a>
     </li>
   );

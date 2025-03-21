@@ -3,6 +3,7 @@ const Home = lazy(() => import("./Home"));
 const ChooseUs = lazy(() => import("./ChooseUs"));
 const Nav = lazy(() => import("../components/Nav"));
 const About = lazy(() => import("./About"));
+const Vehicles = lazy(() => import("./Vehicles"));
 const PageDivider = lazy(() => import("../components/PageDivider"));
 
 
@@ -21,6 +22,8 @@ const Landing = memo(function Landing() {
       <ChooseUs />
       <PageDivider/>
       <About />
+      <PageDivider/>
+      <Vehicles />
       <PageDivider/>
     </Suspense>
   );
