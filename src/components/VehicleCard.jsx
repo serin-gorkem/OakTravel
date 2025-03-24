@@ -106,7 +106,7 @@ function BackFace(props) {
         with prices starting
       </p>
       <hr></hr>
-      <button className="btn btn-warning text-base-100 w-5/8 h-12">
+      <button aria-label="Go to booking button" className="btn btn-warning text-base-100 w-5/8 h-12">
         Go to booking
       </button>
     </figure>

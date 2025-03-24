@@ -49,11 +49,12 @@ function PageNav(props) {
           </h1>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-          <button className="btn btn-primary w-30 lg:w-36 hover:bg-warning hover:border-warning">
+          <button aria-label="Book button" className="btn btn-primary w-30 lg:w-36 hover:bg-warning hover:border-warning">
             Book Now
           </button>
           <button
             onClick={props.handleScrollUp}
+            aria-label="Go back to top button"
             className="btn btn-primary w-30 lg:w-36 hover:bg-warning hover:border-warning"
           >
             Back To top
@@ -215,7 +216,7 @@ function DesktopNav() {
           </Link>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-          <button className="btn w-36 hover:bg-warning hover:border-warning">
+          <button aria-label="Book now button" className="btn w-36 hover:bg-warning hover:border-warning">
             Book Now
           </button>
         </li>

@@ -29,7 +29,7 @@ const Home = memo(function () {
             business, or economy vehicles, enjoy transparent pricing, and rely
             on our professional drivers for a seamless journey.
           </h2>
-          <button className="btn btn-md lg:btn-lg hover:bg-warning hover:border-warning hover:shadow-none w-fit font-paragraph font-light self-baseline">
+          <button aria-label="How to book your ride page navigator button" className="btn btn-md lg:btn-lg hover:bg-warning hover:border-warning hover:shadow-none w-fit font-paragraph font-light self-baseline">
             How to book your ride
           </button>
         </div>

@@ -87,7 +87,7 @@ const Form = memo(function(){
           title="Passenger Count"
         />
       </fieldset>
-      <button type="submit" className="btn btn-primary w-full hover:bg-white hover:text-primary">
+      <button aria-label="submit form" type="submit" className="btn btn-primary w-full hover:bg-white hover:text-primary">
         Search
       </button>
     </form>

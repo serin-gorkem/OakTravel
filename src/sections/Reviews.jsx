@@ -26,7 +26,7 @@ const Reviews = memo(function () {
         </h1>
       </figure>
       <div className="flex gap-2 pb-8">
-        <button className="btn btn-circle text-warning w-14 h-14 shadow-md">
+        <button aria-label="change reviews left" className="btn btn-circle text-warning w-14 h-14 shadow-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -42,7 +42,7 @@ const Reviews = memo(function () {
             />
           </svg>
         </button>
-        <button className="btn btn-circle text-warning w-14 h-14 shadow-md">
+        <button aria-label="change reviews right" className="btn btn-circle text-warning w-14 h-14 shadow-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -80,7 +80,7 @@ const Reviews = memo(function () {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary hover:bg-white hover:text-primary w-64">Review Us On Tripadvisor</button>
+        <button aria-label="tripadvisor site link" className="btn btn-primary hover:bg-white hover:text-primary w-64">Review Us On Tripadvisor</button>
       </div>
     </section>
   );
