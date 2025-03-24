@@ -1,10 +1,11 @@
-import {useState } from "react";
+import { useEffect, useState } from "react";
+import { HashLink as Link } from "react-router-hash-link";
 
 function Nav(props) {
   return (
     <>
       {props.isPageNav ? (
-        <PageNav />
+        <PageNav handleScrollUp={props.handleScrollUp} />
       ) : (
         <>
           <MobileNav />
@@ -15,37 +16,47 @@ function Nav(props) {
   );
 }
 
-function PageNav() {
-  // const [show,setShow] = useState(false);
-  // const [lastScrollY,setLastScrollY] = useState(0);
+function PageNav(props) {
+  const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
+  const [showNav, setShowNav] = useState();
 
-  // const controlNavbar = () => {
-  //   if(window.screenY > lastScrollY){
-  //     setShow(false)
-  //   }else{
-  //     setShow(true)
-  //   }
+  const handleNavBehavior = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
 
-  //   setLastScrollY(window.scrollY);
-  // }
+    if (scrollPosition < 1000) {
+      return setShowNav("opacity-0  pointer-events-none");
+    }else if(scrollPosition > window.pageYOffset){
+      return setShowNav("opacity-100  pointer-events-all");
+    }else{
+      return setShowNav("opacity-0  pointer-events-none");
+    }
 
-  // useEffect( () =>{
-  //   window.addEventListener("scroll", controlNavbar);
-  //   return () => window.removeEventListener("scroll", controlNavbar);
-  // },[lastScrollY])
+  };
 
-  // console.log(window.screenY);
+  useEffect(() => {
+    window.addEventListener("scroll", handleNavBehavior);
+    return () => window.removeEventListener("scroll", handleNavBehavior);
+  });
   return (
-      <nav className={`px-2 p-4 sticky top-0 lg:max-w-9/12 mx-auto z-20 my-16`}>
-      <ul className="flex justify-between w-full">
-        <li>
-          <a href="#">
-            <h1 className="text-primary text-xl ">OAK TRAVEL</h1>
-          </a>
+    <nav
+      className={`px-2 p-8  ${showNav} duration-200 opacity-0 fixed w-full flex bg-black/10 backdrop-blur-md top-0  z-20 `}
+    >
+      <ul className="flex flex-col md:flex-row md:justify-between gap-3 lg:p-0 lg:max-w-9/12 mx-auto w-full  ">
+        <li onClick={props.handleScrollUp} className=" cursor-pointer">
+          <h1 className="text-primary text-3xl hover:text-warning transition-all ">
+            OAK TRAVEL
+          </h1>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-          <button className="btn btn-primary w-36 hover:bg-warning hover:border-warning">
+          <button className="btn btn-primary w-30 lg:w-36 hover:bg-warning hover:border-warning">
             Book Now
+          </button>
+          <button
+            onClick={props.handleScrollUp}
+            className="btn btn-primary w-30 lg:w-36 hover:bg-warning hover:border-warning"
+          >
+            Back To top
           </button>
         </li>
       </ul>
@@ -66,13 +77,18 @@ function MobileNav() {
         <div className="h-96 bg-base-100 flex flex-col sm:hidden">
           <ul className=" p-2 flex justify-between items-center">
             <li>
-              <a href="#">
-                <p className=" font-heading text-primary text-xl">OAK TRAVEL</p>
-              </a>
+              <Link to="/OakTravel">
+                <h1 className="text-base-100 text-3xl hover:text-warning transition-all ">
+                  OAK TRAVEL
+                </h1>
+              </Link>
             </li>
             <li className="flex items-center gap-4">
               {/* Whatsapp Icon */}
-              <a href="https://api.whatsapp.com/send?phone=905540161923" aria-label="whatsapp link"  >
+              <a
+                href="https://api.whatsapp.com/send?phone=905540161923"
+                aria-label="whatsapp link"
+              >
                 <svg
                   viewBox="0 0 24 24"
                   className="h-8 aspect-square p-1.5 bg-white rounded-full"
@@ -136,7 +152,10 @@ function MobileNav() {
             </li>
             <li className="flex items-center gap-4">
               {/* Whatsapp Icon */}
-              <a href="https://api.whatsapp.com/send?phone=905540161923" aria-label="whatsapp link">
+              <a
+                href="https://api.whatsapp.com/send?phone=905540161923"
+                aria-label="whatsapp link"
+              >
                 <svg
                   viewBox="0 0 24 24"
                   className="h-8 aspect-square p-1.5 bg-white rounded-full"
@@ -189,9 +208,11 @@ function DesktopNav() {
     <nav className="hidden sm:flex sm:flex-col items-center z-20 gap-6 w-full lg:px-0 sm:px-4 lg:max-w-9/12 mx-auto ">
       <ul className="flex justify-between w-full">
         <li>
-          <a href="#">
-            <h1 className="text-base-100 text-3xl hover:text-warning transition-all ">OAK TRAVEL</h1>
-          </a>
+          <Link to="/OakTravel">
+            <h1 className="text-base-100 text-3xl hover:text-warning transition-all ">
+              OAK TRAVEL
+            </h1>
+          </Link>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
           <button className="btn w-36 hover:bg-warning hover:border-warning">
@@ -202,12 +223,12 @@ function DesktopNav() {
       <div className="flex flex-col items-center w-full gap-3">
         <hr className="w-full text-base-100"></hr>
         <ul className="text-base-100 flex justify-evenly w-full">
-          {menuItem("Booking", "#")}
-          {menuItem("Who we are", "#")}
-          {menuItem("Our Vehicles", "#")}
-          {menuItem("Reviews", "#")}
+          {menuItem("Booking", "/booking")}
+          {menuItem("Who we are", "#us")}
+          {menuItem("Our Vehicles", "#vehicles")}
+          {menuItem("Reviews", "#reviews")}
           {menuItem("FAQ", "#")}
-          {menuItem("How to book your ride", "#")}
+          {menuItem("How to book your ride", "#steps")}
           {menuItem("Contact", "#")}
         </ul>
         <hr className="w-full text-base-100"></hr>
@@ -217,8 +238,10 @@ function DesktopNav() {
 }
 function menuItem(text, link) {
   return (
-    <li className="font-heading transition-all text-xl active:text-warning hover:text-warning">
-      <a href={link}>{text}</a>
+    <li className="font-heading transition-all text-xl lg:text-[1.25rem] md:text-base active:text-warning hover:text-warning">
+      <Link smooth to={link} aria-label={`Scroll to the ${text} section.`}>
+        {text}
+      </Link>
     </li>
   );
 }

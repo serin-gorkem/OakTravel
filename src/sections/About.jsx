@@ -3,17 +3,17 @@ import TeamImg from "../assets/img/Team.webp";
 
 const About = memo(function () {
   return (
-    <section className="p-2 md:px-4 lg:px-0 flex flex-col gap-4 z-10 lg:max-w-9/12 mx-auto">
+    <section id="about" className="p-2 md:px-4 lg:px-0 flex flex-col gap-8 z-10 lg:max-w-9/12 mx-auto">
       <figure className="flex flex-col gap-2.5">
         <figcaption className="text-xl text-warning lg:text-2xl font-black font-heading leading-tight">
           About Us
         </figcaption>
-        <h1 className=" text-2xl font-medium">Who we are ?</h1>
+        <h1 className="text-2xl lg:text-4xl font-bold opacity-85">Who we are ?</h1>
       </figure>
       <figure className="flex lg:flex-row flex-col gap-4">
-        <img src={TeamImg} className="lg:w-1/2 object-cover" loading="lazy"></img>
+        <img src={TeamImg} className="lg:w-1/2 object-cover" alt="team image" loading="lazy"></img>
         <div className="flex flex-col gap-4">
-          <h2 className="font-bold text-2xl lg:text-4xl ">We are OAK Travel</h2>
+          <h2 className="font-bold text-2xl lg:text-4xl">We are OAK Travel</h2>
           <p className="text-xs font-light text-primary opacity-70 xl:text-xl leading-relaxed tracking-tighter">
             At Oak Travel, we believe that airport transfers should be smooth,
             reliable, and stress-free. Whether you're traveling for business or

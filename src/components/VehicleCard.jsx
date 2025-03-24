@@ -125,6 +125,7 @@ function FrontFace(props) {
       <img
         src={props.img}
         loading="lazy"
+        alt="vehicle image"
         className="object-cover mt-3 object-center w-full md:w-full"
       />
       <h1 className="text-2xl font-heading font-bold">{props.text}</h1>

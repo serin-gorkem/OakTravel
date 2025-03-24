@@ -9,12 +9,12 @@ const ChooseUs = memo(function () {
   });
 
   return (
-    <section className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 lg:max-w-9/12 mx-auto flex-wrap gap-4">
+    <section id="us" className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 lg:max-w-9/12 mx-auto gap-4">
       <figure className="flex flex-col gap-2.5">
         <figcaption className="text-xl lg:text-2xl text-warning font-bold font-heading leading-tight">
           Why Choose Us
         </figcaption>
-        <h1 className=" text-2xl font-medium">Service Tailored to You</h1>
+        <h1 className="text-2xl lg:text-4xl font-bold opacity-85">Service Tailored to You</h1>
       </figure>
       <div className="flex gap-6 flex-wrap">
       {cardsList}
