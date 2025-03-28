@@ -55,8 +55,6 @@
 }
 
 @font-face {
-    font-family: Merriweather;
-    src: url("../src/assets//fonts/Merriweather-Bold.ttf");
     font-family: WorkSans;
     src: url("../src/assets//fonts/WorkSans-Regular.ttf");
 }
