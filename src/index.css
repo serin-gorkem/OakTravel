@@ -2,7 +2,6 @@
 @plugin "daisyui";
 
 @theme {
-    --font-heading: Merriweather, "serif", font-display: swap ;
     --font-paragraph: WorkSans, "sans-serif" font-display: swap;
 }
 
