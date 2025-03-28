@@ -25,13 +25,12 @@ function PageNav(props) {
     setScrollPosition(position);
 
     if (scrollPosition < 1000) {
-      return setShowNav("opacity-0  pointer-events-none");
-    }else if(scrollPosition > window.pageYOffset){
-      return setShowNav("opacity-100  pointer-events-all");
-    }else{
-      return setShowNav("opacity-0  pointer-events-none");
+      return setShowNav("opacity-0 pointer-events-none");
+    } else if (scrollPosition > window.pageYOffset) {
+      return setShowNav("opacity-100 pointer-events-all  z-20");
+    } else {
+      return setShowNav("opacity-0 pointer-events-none");
     }
-
   };
 
   useEffect(() => {
@@ -40,7 +39,7 @@ function PageNav(props) {
   });
   return (
     <nav
-      className={`px-2 p-8  ${showNav} duration-200 opacity-0 fixed w-full flex bg-black/10 backdrop-blur-md top-0  z-20 `}
+      className={`px-2 p-8  ${showNav} duration-200 opacity-0 fixed w-full flex bg-black/10 backdrop-blur-md top-0 -z-10 `}
     >
       <ul className="flex flex-col md:flex-row md:justify-between gap-3 lg:p-0 lg:max-w-9/12 mx-auto w-full  ">
         <li onClick={props.handleScrollUp} className=" cursor-pointer">
@@ -49,13 +48,16 @@ function PageNav(props) {
           </h1>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-          <button aria-label="Book button" className="btn btn-primary w-30 lg:w-36 hover:bg-warning hover:border-warning">
+          <button
+            aria-label="Book button"
+            className="btn btn-primary w-30 lg:w-36 hover:bg-white hover:text-primary"
+          >
             Book Now
           </button>
           <button
             onClick={props.handleScrollUp}
             aria-label="Go back to top button"
-            className="btn btn-primary w-30 lg:w-36 hover:bg-warning hover:border-warning"
+            className="btn w-30 lg:w-36 btn-primary hover:bg-white hover:text-primary"
           >
             Back To top
           </button>
@@ -133,13 +135,13 @@ function MobileNav() {
           </ul>
           <div className=" bg-base-300 h-11/12 m-2 p-4">
             <ul className="flex flex-col h-full justify-between text-primary">
-              {menuItem("Booking", "#")}
-              {menuItem("Who we are", "#")}
-              {menuItem("Our Vehicles", "#")}
-              {menuItem("Reviews", "#")}
-              {menuItem("FAQ", "#")}
-              {menuItem("How to book your ride", "#")}
-              {menuItem("Contact", "#")}
+              {menuItem("Booking", "/booking")}
+              {menuItem("Who we are", "#us")}
+              {menuItem("Our Vehicles", "#vehicles")}
+              {menuItem("Reviews", "#reviews")}
+              {menuItem("How to book your ride", "#steps")}
+              {menuItem("FAQ", "#FAQ")}
+              {menuItem("Contact", "#Contact")}
             </ul>
           </div>
         </div>
@@ -216,7 +218,10 @@ function DesktopNav() {
           </Link>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-          <button aria-label="Book now button" className="btn w-36 hover:bg-warning hover:border-warning">
+          <button
+            aria-label="Book now button"
+            className="btn w-36 hover:bg-primary hover:border-primary hover:shadow-none hover:text-base-100"
+          >
             Book Now
           </button>
         </li>
@@ -228,9 +233,9 @@ function DesktopNav() {
           {menuItem("Who we are", "#us")}
           {menuItem("Our Vehicles", "#vehicles")}
           {menuItem("Reviews", "#reviews")}
-          {menuItem("FAQ", "#")}
           {menuItem("How to book your ride", "#steps")}
-          {menuItem("Contact", "#")}
+          {menuItem("FAQ", "#FAQ")}
+          {menuItem("Contact", "#Contact")}
         </ul>
         <hr className="w-full text-base-100"></hr>
       </div>
