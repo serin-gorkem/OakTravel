@@ -15,9 +15,9 @@ const Footer = memo(function () {
           </p>
         </div>
         <nav>
-          <h6 className="footer-title underline underline-offset-8 decoration-warning text-base-300 ">
+          <h1 className="footer-title underline underline-offset-8 decoration-warning text-base-300 ">
             Browse
-          </h6>
+          </h1>
           <ul className="text-base-100 w-full">
             {menuItem("Home", "/")}
             {menuItem("About Us", "#about")}

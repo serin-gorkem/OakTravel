@@ -48,7 +48,7 @@ const FAQ = memo(function () {
 function FAQElement(props) {
   return (
     <div className="collapse collapse-arrow join-item border-primary border">
-      <input type="radio" name="my-accordion-4" defaultChecked />
+      <input aria-label="faq-element" type="radio" name="my-accordion-4" defaultChecked />
       <div className="collapse-title font-semibold">{props.title}</div>
       <div className="collapse-content text-sm">{props.text}</div>
     </div>
