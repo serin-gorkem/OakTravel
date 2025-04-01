@@ -4,7 +4,7 @@ const Contact = memo(function () {
   return (
     <section
       id="Contact"
-      className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 lg:max-w-9/12 mx-auto gap-8 lg:gap-16"
+      className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 xl:max-w-9/12 lg:max-w-11/12 mx-auto gap-8 lg:gap-16"
     >
       <figure className="flex flex-col gap-2.5">
         <figcaption className="text-xl lg:text-2xl text-warning font-bold font-heading leading-tight">
@@ -119,10 +119,10 @@ const Contact = memo(function () {
           </p>
           <iframe
             loading="lazy"
-            allowfullscreen
-            title="locaiton-map"
+            allowFullScreen
+            title="location-map"
             className="w-full h-64 lg:h-full"
-            referrerpolicy="no-referrer-when-downgrade"
+            referrerPolicy="no-referrer-when-downgrade"
             src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ9eNRs4OpvhQREf4JZnlssoQ&key=AIzaSyAgnp8azpZeKDhalpnFadk00RxnCulWBNM
     &q=Space+Needle,Seattle+WA"
           ></iframe>

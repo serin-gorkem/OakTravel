@@ -4,7 +4,7 @@ const FAQ = memo(function () {
   return (
     <section
       id="FAQ"
-      className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 lg:max-w-9/12 mx-auto gap-8 lg:gap-16"
+      className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 xl:max-w-9/12 lg:max-w-11/12 mx-auto gap-8 lg:gap-16"
     >
       <figure className="flex flex-col gap-2.5">
         <figcaption className="text-xl lg:text-2xl text-warning font-bold font-heading leading-tight">

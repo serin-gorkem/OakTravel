@@ -3,7 +3,7 @@ import TeamImg from "../assets/img/Team.webp";
 
 const About = memo(function () {
   return (
-    <section id="about" className="p-2 md:px-4 lg:px-0 flex flex-col gap-8 z-10 lg:max-w-9/12 mx-auto">
+    <section id="about" className="p-2 md:px-4 lg:px-0 flex flex-col gap-8 z-10 xl:max-w-9/12 lg:max-w-11/12 mx-auto">
       <figure className="flex flex-col gap-2.5">
         <figcaption className="text-xl text-warning lg:text-2xl font-black font-heading leading-tight">
           About Us

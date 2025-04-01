@@ -1,21 +1,18 @@
-import { lazy, memo, Suspense, useRef } from "react";
-import Reviews from "./Reviews";
-import Steps from "./Steps";
-import Contact from "./Contact";
-const Home = lazy(() => import("./Home"));
-const FAQ = lazy(() => import("./FAQ"));
-const ChooseUs = lazy(() => import("./ChooseUs"));
-const Nav = lazy(() => import("../components/Nav"));
-const About = lazy(() => import("./About"));
-const Vehicles = lazy(() => import("./Vehicles"));
-const Footer = lazy(() => import("./Footer"));
-const PageDivider = lazy(() => import("../components/PageDivider"));
+import { lazy, memo, Suspense } from "react";
+import Reviews from "./sections/Reviews";
+import Steps from "./sections/Steps";
+import Contact from "./sections/Contact";
+const Home = lazy(() => import("./sections/Home"));
+const FAQ = lazy(() => import("./sections/FAQ"));
+const ChooseUs = lazy(() => import("./sections/ChooseUs"));
+const Nav = lazy(() => import("./components/Nav"));
+const About = lazy(() => import("./sections/About"));
+const Vehicles = lazy(() => import("./sections/Vehicles"));
+const Footer = lazy(() => import("./sections/Footer"));
+const PageDivider = lazy(() => import("./components/PageDivider"));
 
 const Landing = memo(function Landing() {
-  const refScrollUp = useRef(null);
-  const handleScrollUp = () => {
-    refScrollUp.current.scrollIntoView({ behavior: "smooth" });
-  };
+
   const whatsappIcon = (
     <a
       href="https://api.whatsapp.com/send?phone=905540161923"
@@ -45,11 +42,8 @@ const Landing = memo(function Landing() {
   );
   return (
     <Suspense fallback={<LoadingScreen />}>
-      <div ref={refScrollUp}></div>
       {whatsappIcon}
-      <Home />
-      <Nav isPageNav={true} handleScrollUp={handleScrollUp} />
-      {/* <Nav isPageNav={true} /> */}
+      <Home/>
       <PageDivider />
       <ChooseUs />
       <PageDivider />

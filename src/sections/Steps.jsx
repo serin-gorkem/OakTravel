@@ -6,7 +6,7 @@ import step_4 from "../assets/svgs/step_4.svg";
 
 const Steps = memo(function () {
   return (
-    <section id="steps" className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 lg:max-w-9/12 mx-auto gap-8 lg:gap-16">
+    <section id="steps" className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 xl:max-w-9/12 lg:max-w-11/12 mx-auto gap-8 lg:gap-16">
       <figure className="flex flex-col gap-2.5">
         <figcaption className="text-xl lg:text-2xl text-warning font-bold font-heading leading-tight">
           How to book your ride
@@ -26,11 +26,9 @@ const Steps = memo(function () {
 });
 
 function Step(props) {
-    console.log(props.direction);
-    
   return (
     <div className={`w-full flex flex-col md:flex-row ${props.direction} justify-between gap-8 xl:gap-32`}>
-      <img src={props.svg} alt="Fill out the Form" className="h-64  lg:h-64 xl:h-96" />
+      <img src={props.svg} loading="lazy" alt="Fill out the Form" className="h-64 lg:h-64 xl:h-96" />
       <div className="flex flex-col gap-4">
         <h2 className="font-bold text-2xl xl:text-3xl">{props.title}</h2>
         <p className="text-xl lg:text-2xl">{props.text}</p>

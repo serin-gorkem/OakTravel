@@ -16,7 +16,7 @@ const Reviews = memo(function () {
     );
   });
   return (
-    <section id="reviews" className="h-fit px-2 mt-16 flex flex-col flex-wrap gap-4 lg:p-0 lg:max-w-9/12 mx-auto sm:gap-8">
+    <section id="reviews" className="h-fit px-2 mt-16 flex flex-col flex-wrap gap-4 lg:p-0 xl:max-w-9/12 lg:max-w-11/12 mx-auto sm:gap-8">
       <figure className="flex flex-col gap-2.5 sm:gap-4 pb-8 ">
         <figcaption className="text-xl lg:text-2xl text-warning font-bold font-heading leading-tight">
           Reviews

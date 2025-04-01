@@ -3,6 +3,7 @@
 
 @theme {
     --font-paragraph: WorkSans, "sans-serif" font-display: swap;
+    --color-gray: oklch(0.79 0 0);
 }
 
 @plugin "daisyui/theme" {
@@ -18,7 +19,7 @@
     --color-primary-content: oklch(93% 0.034 272.788);
     --color-secondary: oklch(65% 0.241 354.308);
     --color-secondary-content: oklch(94% 0.028 342.258);
-    --color-accent: oklch(77% 0.152 181.912);
+    --color-accent: oklch(0.79 0 0)
     --color-accent-content: oklch(38% 0.063 188.416);
     --color-neutral: oklch(14% 0.005 285.823);
     --color-neutral-content: oklch(92% 0.004 286.32);
@@ -44,12 +45,12 @@
     body {
         font-family: "WorkSans", sans-serif;
         background-color: oklch(95% 0 0);
+        scroll-behavior: smooth;
     }
     html{
         background-color: oklch(95% 0 0) !important;
     }
 }
-
 @plugin "daisyui" {
     themes: light --default, dark --prefersdark, base;
 }

@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-const Card = memo(function (props) {
+const SpecsCard = memo(function (props) {
   return (
     <article className="bg-base-300 rounded-box shadow-md flex md:flex-1/3 lg:flex-1/4 flex-col p-4">
       <figure className="flex flex-col justify-baseline gap-2">
@@ -12,4 +12,4 @@ const Card = memo(function (props) {
   );
 });
 
-export default Card;
+export default SpecsCard;

@@ -1,17 +1,17 @@
 import { lazy, memo } from "react";
-const Card = lazy(() => import("../components/Card"));
+const SpecsCard = lazy(() => import("../components/SpecsCard"));
 
 const ChooseUs = memo(function () {
   const cardsList = cardInfo.map((card) => {
     return (
-      <Card key={card.id} title={card.title} svg={card.svg} text={card.text} />
+      <SpecsCard key={card.id} title={card.title} svg={card.svg} text={card.text} />
     );
   });
 
   return (
     <section
       id="us"
-      className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 lg:max-w-9/12 mx-auto gap-4"
+      className="h-fit mt-16 px-2 pb-8 flex flex-col lg:p-0 xl:max-w-9/12 lg:max-w-11/12 mx-auto gap-4"
     >
       <figure className="flex flex-col gap-2.5">
         <figcaption className="text-xl lg:text-2xl text-warning font-bold font-heading leading-tight">

@@ -7,7 +7,7 @@ const Stars = lazy(() => import("../components/Stars"));
 const Home = memo(function () {
   return (
     <section id="home" className="h-fit border-red-500 flex flex-col relative sm:gap-5 lg:gap-10">
-      <Nav />
+      <Nav isBookingPage={false} />
       <img
         src={backgroundImage}
         className="object-center object-cover absolute w-full brightness-50 h-full"
@@ -15,7 +15,7 @@ const Home = memo(function () {
       />
       <article
         id="above-the-fold"
-        className="p-2 md:px-4 mb-24 lg:px-0 flex flex-col lg:flex-row gap-4 z-10 lg:max-w-9/12 mx-auto"
+        className="p-2 md:px-4 mb-24 lg:px-0 flex flex-col lg:flex-row gap-4 z-10 xl:max-w-9/12 lg:max-w-11/12 mx-auto"
       >
         <div className="flex flex-col w-fit  gap-4">
           <h1 className="font-heading font-bold tracking-tight leading-snug text-2xl sm:w-full lg:leading-tight md:w-full lg:w-fit xl:w-9/12 sm:text-4xl xl:text-6xl text-base-100">
