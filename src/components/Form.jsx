@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { HashLink as Link } from "react-router-hash-link";
 
 
 const Form = memo(function(){
@@ -87,9 +88,9 @@ const Form = memo(function(){
           title="Passenger Count"
         />
       </fieldset>
-      <button aria-label="submit form" type="submit" className="btn btn-primary w-full hover:bg-white hover:text-primary">
+      <Link smooth to="vehicle-features" className="btn btn-primary w-full hover:bg-white hover:text-primary" aria-label={`Scroll to the Search section.`}>
         Search
-      </button>
+      </Link>
     </form>
   );
 })
