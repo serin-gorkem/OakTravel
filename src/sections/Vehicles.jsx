@@ -1,7 +1,7 @@
 import { lazy, memo } from "react";
 
 const VehicleCard = lazy(() => import("../components/VehicleCard"));
-import Vito from "../assets/img/vehicles/vito.webp";
+import CarVitoIMG from "../assets/img/vehicles/vito.webp";
 
 const Vehicles = memo(function () {
   return (
@@ -22,7 +22,7 @@ const Vehicles = memo(function () {
       </figure>
       <div className="flex gap-6 flex-wrap">
         <VehicleCard
-          img={Vito}
+          img={CarVitoIMG}
           text="Mercedes Vito"
           personCount="7 Person"
           bagsCount="6 bags"
@@ -35,7 +35,7 @@ const Vehicles = memo(function () {
           ]}
         />
         <VehicleCard
-          img={Vito}
+          img={CarVitoIMG}
           text="Mercedes Vito"
           personCount="7 Person"
           bagsCount="6 bags"
@@ -48,7 +48,7 @@ const Vehicles = memo(function () {
           ]}
         />
         <VehicleCard
-          img={Vito}
+          img={CarVitoIMG}
           text="Mercedes Vito"
           personCount="7 Person"
           bagsCount="6 bags"
@@ -61,7 +61,7 @@ const Vehicles = memo(function () {
           ]}
         />
         <VehicleCard
-          img={Vito}
+          img={CarVitoIMG}
           text="Mercedes Vito"
           personCount="7 Person"
           bagsCount="6 bags"
@@ -74,7 +74,7 @@ const Vehicles = memo(function () {
           ]}
         />
         <VehicleCard
-          img={Vito}
+          img={CarVitoIMG}
           text="Mercedes Vito"
           personCount="7 Person"
           bagsCount="6 bags"
@@ -87,7 +87,7 @@ const Vehicles = memo(function () {
           ]}
         />
         <VehicleCard
-          img={Vito}
+          img={CarVitoIMG}
           text="Mercedes Vito"
           personCount="7 Person"
           bagsCount="6 bags"

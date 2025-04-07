@@ -5,6 +5,7 @@ import "react-day-picker/style.css";
 const TransferCard = memo(function (props) {
   const [returnDate, setReturnDate] = useState();
   const [returnHour, setReturnHour] = useState("00:00");
+  const [showDateSetError, setShowDateSetError] = useState(false);
 
   function handleTimeChange(e) {
     const time = e.target.value;
@@ -21,19 +22,26 @@ const TransferCard = memo(function (props) {
     returnPanel.classList.toggle("opacity-0");
     returnPanel.classList.toggle("pointer-events-none");
   }
-  function confirmReturn(e){
+  function confirmReturn(e) {
     e.preventDefault();
     const returnPanel = document.getElementById("return-panel");
     const returnDOM = document.getElementById("return");
     const returnButton = document.getElementById("return-btn");
-    returnPanel.classList.toggle("opacity-0");
-    returnPanel.classList.toggle("pointer-events-none");
-    returnDOM.classList.toggle("hidden")
-    returnButton.classList.add("hidden")
+    if (returnDate && returnHour) {
+      returnPanel.classList.toggle("opacity-0");
+      returnPanel.classList.toggle("pointer-events-none");
+      returnDOM.classList.toggle("hidden");
+      returnButton.classList.add("hidden");
+      showDateSetError(false);
+    } else {
+      /* User has not set a return date  */
+      setShowDateSetError(true);
+      console.log(showDateSetError);
+    }
   }
 
   return (
-    <article className="bg-base-300 rounded-box shadow-md flex flex-col p-2 py-4">
+    <article className="bg-base-300 rounded-box shadow-md lg:w-full flex flex-col p-2 py-4">
       <h2 className="font-semibold text-xl">Your Transfer</h2>
       <hr className=" text-gray w-full my-2"></hr>
       <div>
@@ -279,7 +287,7 @@ const TransferCard = memo(function (props) {
           <button
             id="return-btn"
             aria-label="add return trip button"
-            className="btn btn-primary w-1/2 hover:bg-white hover:text-primary"
+            className="btn btn-primary w-fit hover:bg-white hover:text-primary"
             onClick={handleReturnTrip}
           >
             ADD A RETURN
@@ -294,22 +302,23 @@ const TransferCard = memo(function (props) {
           onClick={handleReturnTrip}
           className="bg-primary h-screen w-full opacity-70 absolute"
         ></div>
-        <div className="flex flex-col w-full p-4 gap-2 items-center ">
-        <div className="flex flex-col items-center w-full lg:w-5/12 md:w-1/2 xl:w-3/12">
-          <h1 className=" text-base-300 font-bold z-20 self-baseline ">Select pickup time</h1>
-          <DayPicker
-            mode="single"
-            disabled={{ before: new Date() }}
-            selected={returnDate}
-            onSelect={handleDaySelect}
-            className={`bg-base-300 rounded-box p-3 flex flex-col items-center w-full`}
-            footer={returnDate ? `Return Date: ${returnDate}` : ""}
-          />
-        </div>
-          <form className="z-20 flex  w-full lg:w-5/12 md:w-1/2 xl:w-3/12 flex-col gap-2">
-            <label className="font-bold text-white ">
-              Select pickup time:
-            </label>
+        <div className="flex flex-col w-fit p-4 gap-2 lg:gap-4 items-center ">
+          <div className="flex flex-col items-center w-full gap-4">
+            <h1 className=" text-base-300 font-bold z-20 self-baseline ">
+              Select pickup time
+            </h1>
+            <DayPicker
+              mode="single"
+              required={true}
+              disabled={{ before: new Date() }}
+              selected={returnDate}
+              onSelect={handleDaySelect}
+              className={`bg-base-300 rounded-box p-3 lg:px-8 flex flex-col items-center `}
+              footer={returnDate ? `Return Date: ${returnDate}` : ""}
+            />
+          </div>
+          <form className="z-20 flex w-full flex-col gap-2">
+            <label className="font-bold text-white ">Select pickup time:</label>
             <input
               type="time"
               className="input focus-within:outline-0 w-full text-primary"
@@ -320,11 +329,18 @@ const TransferCard = memo(function (props) {
               onClick={confirmReturn}
               type="submit"
               aria-label="confirm return trip button"
-              className="btn btn-primary w-1/2 hover:bg-white hover:text-primary"
+              className="btn btn-primary w-1/2 lg:w- hover:bg-white hover:text-primary"
             >
               CONFIRM
             </button>
           </form>
+          <h1
+            className={`text-base-100 z-10 text-lg transition-all ${
+              showDateSetError === true ? "opacity-100" : "opacity-0"
+            } `}
+          >
+            Please select a return date and time
+          </h1>
         </div>
       </div>
     </article>
