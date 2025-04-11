@@ -1,8 +1,8 @@
 import { lazy, memo, Suspense } from "react";
 import Reviews from "./sections/Reviews";
-import Steps from "./sections/Steps";
 import Contact from "./sections/Contact";
 const Home = lazy(() => import("./sections/Home"));
+const Steps = lazy(() => import("./sections/Steps"));
 const FAQ = lazy(() => import("./sections/FAQ"));
 const ChooseUs = lazy(() => import("./sections/ChooseUs"));
 const Nav = lazy(() => import("./components/Nav"));

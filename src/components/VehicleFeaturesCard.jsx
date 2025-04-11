@@ -1,9 +1,9 @@
 import { memo } from "react";
 
 const VehicleFeaturesCard = memo(function (props) {
-  const featuresList = props.features.map((feature) => {
+  const featuresList = props.features.map((feature,index) => {
     return (
-      <li className="flex gap-1">
+      <li key={index} className="flex gap-1">
         {/* Tick SVG */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +23,6 @@ const VehicleFeaturesCard = memo(function (props) {
       </li>
     );
   });
-  console.log(featuresList);
-
   return (
     <article className="bg-base-300 rounded-box shadow-md flex gap-4 flex-col p-2 ">
       <img src={props.img} className="lg:w-1/3 w-1/2"></img>
@@ -95,7 +93,7 @@ const VehicleFeaturesCard = memo(function (props) {
       <hr className="w-full"></hr>
       <div className="flex flex-col gap-2">
         <p>Total one-way price</p>
-        <h2 className="text-2xl font-bold">{props.price}</h2>
+        <h2 className="text-2xl lg:text-4xl font-bold">{props.price}</h2>
         <div className="flex bg-[#C2E6D2] text-success-content rounded-box p-1 font-bold w-fit gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"

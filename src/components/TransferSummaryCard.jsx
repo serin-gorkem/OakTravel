@@ -2,7 +2,7 @@ import { memo, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 
-const TransferCard = memo(function (props) {
+const TransferSummaryCard = memo(function (props) {
   const [returnDate, setReturnDate] = useState();
   const [returnHour, setReturnHour] = useState("00:00");
   const [showDateSetError, setShowDateSetError] = useState(false);
@@ -347,4 +347,4 @@ const TransferCard = memo(function (props) {
   );
 });
 
-export default TransferCard;
+export default TransferSummaryCard;

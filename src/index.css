@@ -46,6 +46,7 @@
         font-family: "WorkSans", sans-serif;
         background-color: oklch(95% 0 0);
         scroll-behavior: smooth;
+        overflow-x:hidden ;
     }
     html{
         background-color: oklch(95% 0 0) !important;

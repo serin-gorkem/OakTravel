@@ -3,8 +3,8 @@ import { HashLink as Link } from "react-router-hash-link";
 
 const Footer = memo(function () {
   return (
-    <div className=" bg-primary py-12">
-      <footer className="footer sm:footer-horizontal xl:max-w-9/12 lg:max-w-11/12 lg:px-0 sm:px-4 px-2  mx-auto text-neutral-content">
+    <footer className="bg-primary py-12 relative w-screen right-1/2 left-1/2 -translate-x-1/2 ">
+      <div className="footer sm:footer-horizontal xl:max-w-9/12 lg:max-w-11/12 lg:px-0 sm:px-4 px-2  mx-auto text-neutral-content">
         <div>
           <h1 className="text-2xl text-base-300 font-bold">Oak Travel</h1>
           <p className="w-10/12 text-sm">
@@ -114,8 +114,8 @@ const Footer = memo(function () {
             </li>
           </ul>
         </nav>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 });
 function menuItem(text, link) {

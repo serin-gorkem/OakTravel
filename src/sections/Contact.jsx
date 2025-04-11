@@ -94,6 +94,7 @@ const Contact = memo(function () {
               Call our team Mon-Fri From 8am to 5pm
             </p>
             <div className="flex gap-2 ">
+            {/* Phone SVG */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -117,6 +118,7 @@ const Contact = memo(function () {
           <p className="text-xs lg:text-base">
             Our office is located in Turkey / Kusadasi
           </p>
+          {/* Will change in feature updates. */}
           <iframe
             loading="lazy"
             allowFullScreen
