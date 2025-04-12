@@ -210,7 +210,7 @@ function MobileNav(props) {
               >
                 <svg
                   viewBox="0 0 24 24"
-                  className="h-8 aspect-square p-1.5 bg-white rounded-full"
+                  className="size-8 aspect-square p-1.5 bg-white rounded-full"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -262,12 +262,12 @@ function BookingNav(props) {
         <ul className="p-2 flex justify-between items-center">
           <li>
             <a href="#">
-              <p className=" font-heading text-primary text-xl">OAK TRAVEL</p>
+              <p className=" font-heading text-primary text-2xl">OAK TRAVEL</p>
             </a>
           </li>
-          <li className="flex items-center gap-4">
+          <li className="flex cursor-pointer items-center gap-4">
             <div className="dropdown">
-              <div tabIndex={0} role="button" className=" m-1">
+              <div tabIndex={0} role="button" className="m-1">
                 {props.currencySvg}
               </div>
               <ul
@@ -284,7 +284,7 @@ function BookingNav(props) {
             >
               <svg
                 viewBox="0 0 24 24"
-                className="h-10 aspect-square p-1.5 bg-primary rounded-full"
+                className="size-10 aspect-square p-1.5 bg-primary rounded-full"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -381,7 +381,7 @@ const currencyList = [
         viewBox="0 0 440 440"
         xmlSpace="preserve"
         stroke="#1E272E"
-        className="h-8 sm:h-10 aspect-square p-2 bg-white rounded-full"
+        className="size-10 aspect-square p-2 bg-white rounded-full"
       >
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
@@ -401,7 +401,7 @@ const currencyList = [
         id="Layer_1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 440 440"
-        className="h-8 sm:h-10 aspect-square p-2 bg-primary text-base-300 rounded-full"
+        className="size-10 sm:h-10 aspect-square p-2 bg-primary text-base-300 rounded-full"
         stroke="#ffffff"
       >
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -426,7 +426,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="h-8 sm:h-10 aspect-square p-1 bg-white rounded-full"
+        className="size-10 aspect-square p-1 bg-white rounded-full"
       >
         <path
           strokeLinecap="round"
@@ -442,7 +442,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="h-8 sm:h-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
+        className="size-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
       >
         <path
           strokeLinecap="round"
@@ -462,7 +462,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="h-8 sm:h-10 aspect-square p-1 bg-white rounded-full"
+        className="size-10 aspect-square p-1 bg-white rounded-full"
       >
         <path
           strokeLinecap="round"
@@ -478,7 +478,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="h-8 sm:h-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
+        className="size-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
       >
         <path
           strokeLinecap="round"

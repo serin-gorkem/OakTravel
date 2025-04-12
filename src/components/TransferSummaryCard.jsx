@@ -18,6 +18,7 @@ const TransferSummaryCard = memo(function (props) {
 
   function handleReturnTrip() {
     const returnPanel = document.getElementById("return-panel");
+    
     console.log("remove panel" + returnPanel);
     returnPanel.classList.toggle("opacity-0");
     returnPanel.classList.toggle("pointer-events-none");

@@ -32,7 +32,7 @@ const VehicleFeatures = memo(function () {
     <>
       <Nav isBookingPage={true} />
       <div className="flex relative flex-col justify-between lg:block xl:max-w-9/12 lg:max-w-11/12 mx-auto">
-        <section className="p-2 md:px-4 flex justify-between flex-col lg:flex-row-reverse gap-4 w-full lg:px-0 ">
+        <section className="p-4 md:px-4 flex justify-between flex-col lg:flex-row-reverse gap-4 w-full lg:px-0 ">
           <div className="lg:hidden block">
             <PageIndicator />
           </div>
