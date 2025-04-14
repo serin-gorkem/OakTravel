@@ -2,7 +2,7 @@ import { lazy, memo } from "react";
 import Tripadvisor from "../assets/img/Tripadvisor-Logo.webp";
 import backgroundImage from "../assets/img/Home_bg.webp";
 const Nav = lazy(() => import("../components/Nav"));
-const Form = lazy(() => import("../components/Form"));
+const LandingPageForm = lazy(() => import("../components/LandingPageForm"));
 const Stars = lazy(() => import("../components/Stars"));
 const Home = memo(function () {
   return (
@@ -34,7 +34,7 @@ const Home = memo(function () {
           </button>
         </div>
         <div className="relative sm:max-w-96 h-fit w-full">
-          <Form />
+          <LandingPageForm />
           <div className="absolute bg-base-300 rounded-box shadow-xl h-16 w-10/12 left-1/2 -translate-x-1/2 -bottom-13 pt-2 px-2 -z-10 flex justify-between items-center">
             <img
               src={Tripadvisor}

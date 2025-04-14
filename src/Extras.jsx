@@ -23,6 +23,7 @@
   import { APIProvider, Map } from "@vis.gl/react-google-maps";
   const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
   import CarVitoIMG from "./assets/img/vehicles/vito.webp";
+import ExtrasCard from "./components/ExtrasCard";
   
   {
     /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
@@ -36,6 +37,7 @@
             <div className="lg:hidden block">
             {/* Use switch case to change the page indicator */}
               <PageIndicator activePage={"Extras"} />
+              <ExtrasCard/>
             </div>
             <aside className="flex flex-col gap-3 xl:w-4/12 lg:w-5/12">
             <ExtrasSummaryCard
@@ -55,6 +57,7 @@
             <div className="lg:w-full flex flex-col gap-4">
               <div className="hidden lg:block">
                 <PageIndicator />
+                <ExtrasCard/>
               </div>
             </div>
           </section>

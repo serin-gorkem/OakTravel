@@ -2,7 +2,7 @@ import { memo } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 
 
-const Form = memo(function(){
+const LandingPageForm = memo(function(){
   const today = new Date().toLocaleString("EN-CA").slice(0, 10) + "T00:00";
   return (
     <form className="bg-base-300 w-full rounded-box p-5 flex flex-col justify-between h-fit gap-3 shadow-xl ">
@@ -94,4 +94,4 @@ const Form = memo(function(){
     </form>
   );
 })
-export default Form;
+export default LandingPageForm;
