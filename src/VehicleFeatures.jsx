@@ -180,7 +180,7 @@ const VehicleFeatures = memo(function () {
         <div className="[&>section]:max-w-full">
           <Steps />
         </div>
-        <div className="bg-primary h-fit">
+        <div className="bg-primary h-fit mt-10">
           <Footer />
         </div>
       </div>

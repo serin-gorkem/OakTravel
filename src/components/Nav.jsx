@@ -76,17 +76,7 @@ function PageNav(props) {
           </h1>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className=" m-1">
-              {props.currencySvg}
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content mt-2 bg-base-300 right-1/2 left-1/2 -translate-x-1/2 rounded-box w-32 flex justify-center items-center shadow-sm"
-            >
-              {props.renderCurrencyList}
-            </ul>
-          </div>
+
           <button
             aria-label="Book button"
             className="btn btn-primary w-30 lg:w-36 hover:bg-white hover:text-primary"
@@ -100,6 +90,17 @@ function PageNav(props) {
           >
             Back To top
           </button>
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className=" m-1">
+              {props.currencySvg}
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content mt-2 bg-base-300 right-1/2 left-1/2 -translate-x-1/2 rounded-box w-32 flex justify-center items-center shadow-sm"
+            >
+              {props.renderCurrencyList}
+            </ul>
+          </div>
         </li>
       </ul>
     </nav>
