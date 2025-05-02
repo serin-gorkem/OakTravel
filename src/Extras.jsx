@@ -7,13 +7,10 @@ import { lazy, memo } from "react";
   /* Lazy Loadings */
 }
 const Footer = lazy(() => import("./sections/Footer"));
-const TransferSummaryCard = lazy(() =>
-  import("./components/TransferSummaryCard")
-);
 const Nav = lazy(() => import("./components/Nav"));
 const Steps = lazy(() => import("./sections/Steps"));
 const PageIndicator = lazy(() => import("./components/PageIndicator"));
-const ExtrasSummaryCard = lazy(() => import("./components/ExtrasSummaryCard"));
+const SummaryCard = lazy(() => import("./components/SummaryCard"));
 
 {
   /* API Keys and images import */
@@ -26,7 +23,7 @@ import ExtrasCard from "./components/ExtrasCard";
 {
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
 }
-const VehicleFeatures = memo(function () {
+const Extras = memo(function () {
   return (
     <>
       <Nav isBookingPage={true} />
@@ -34,12 +31,14 @@ const VehicleFeatures = memo(function () {
         <section className="p-4 md:px-4 flex justify-between flex-col lg:flex-row-reverse gap-4 w-full lg:px-0 ">
           <div className="lg:hidden block">
             {/* Use switch case to change the page indicator */}
-            <PageIndicator activePage={"Extras"} />
+            <PageIndicator activePage={"Details"} />
             <ExtrasCard />
           </div>
           <aside className="flex flex-col gap-3 xl:w-4/12 lg:w-5/12">
-            <ExtrasSummaryCard
+            <SummaryCard
+              showItems={true}
               img={CarVitoIMG}
+              title={"Transfer Details"}
               transferType={"ONE WAY"}
               vehicleType={"Mercedes Vito"}
               pickupLocation={
@@ -95,7 +94,8 @@ const VehicleFeatures = memo(function () {
           </aside>
           <div className="lg:w-full flex flex-col gap-4">
             <div className="hidden lg:flex lg:flex-col lg:gap-4">
-              <PageIndicator />
+              {/*For page indicator active functionality, later.*/}
+              <PageIndicator active ={"Details"} />
               <ExtrasCard />
             </div>
           </div>
@@ -111,4 +111,4 @@ const VehicleFeatures = memo(function () {
   );
 });
 
-export default VehicleFeatures;
+export default Extras;

@@ -5,6 +5,7 @@ import "react-day-picker/style.css";
 const TransferSummaryCard = memo(function (props) {
   const [returnDate, setReturnDate] = useState();
   const [returnHour, setReturnHour] = useState("00:00");
+  const [personCount, setPersonCount] = useState(1);
   const [showDateSetError, setShowDateSetError] = useState(false);
 
   function handleTimeChange(e) {
@@ -15,10 +16,15 @@ const TransferSummaryCard = memo(function (props) {
     const newDate = date.toString().slice(0, 15);
     setReturnDate(newDate);
   }
+  function handlePersonCount(e) {
+    const count = e.target.value;
+    setPersonCount(count);
+  }
 
   function handleReturnTrip() {
     const returnPanel = document.getElementById("return-panel");
-    
+
+    document.body.classList.toggle("overflow-y-hidden");
     console.log("remove panel" + returnPanel);
     returnPanel.classList.toggle("opacity-0");
     returnPanel.classList.toggle("pointer-events-none");
@@ -28,7 +34,8 @@ const TransferSummaryCard = memo(function (props) {
     const returnPanel = document.getElementById("return-panel");
     const returnDOM = document.getElementById("return");
     const returnButton = document.getElementById("return-btn");
-    if (returnDate && returnHour) {
+    document.body.classList.toggle("overflow-y-hidden");
+    if (returnDate && returnHour && personCount ) {
       returnPanel.classList.toggle("opacity-0");
       returnPanel.classList.toggle("pointer-events-none");
       returnDOM.classList.toggle("hidden");
@@ -297,7 +304,7 @@ const TransferSummaryCard = memo(function (props) {
       </div>
       <div
         id="return-panel"
-        className="w-full opacity-0 pointer-events-none transition-all gap-3 flex flex-col items-center justify-center top-0 h-screen absolute left-0 z-20"
+        className="w-full opacity-0 pointer-events-none transition-all gap-3 flex flex-col items-center justify-center top-0 h-screen fixed left-0 z-20"
       >
         <div
           onClick={handleReturnTrip}
@@ -319,13 +326,32 @@ const TransferSummaryCard = memo(function (props) {
             />
           </div>
           <form className="z-20 flex w-full flex-col gap-2">
-            <label className="font-bold text-white ">Select pickup time:</label>
-            <input
-              type="time"
-              className="input focus-within:outline-0 w-full text-primary"
-              value={returnHour}
-              onChange={handleTimeChange}
-            />
+            <fieldset className="fieldset flex focus-within:outline-0">
+              <legend className="font-bold text-base text-base-100">
+                Passenger Count (Max - 10)
+              </legend>
+              <input
+                type="number"
+                className="input validator focus-within:outline-0 w-full"
+                placeholder="Passengers (1-10)"
+                min="1"
+                max="10"
+                value={personCount}
+                onchange={handlePersonCount}
+                title="Passenger Count"
+              />
+            </fieldset>
+            <fieldset className="fieldset flex focus-within:outline-0">
+              <legend className="font-bold text-base text-base-100">
+                Select pickup time:
+              </legend>
+              <input
+                type="time"
+                className="input focus-within:outline-0 w-full text-primary"
+                value={returnHour}
+                onChange={handleTimeChange}
+              />
+            </fieldset>
             <button
               onClick={confirmReturn}
               type="submit"

@@ -1,7 +1,6 @@
 import { memo } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 
-
 const LandingPageForm = memo(function(){
   const today = new Date().toLocaleString("EN-CA").slice(0, 10) + "T00:00";
   return (
@@ -78,7 +77,7 @@ const LandingPageForm = memo(function(){
         />
       </fieldset>
       <fieldset className="fieldset flex focus-within:outline-0">
-        <legend className="font-semibold text-sm">Passenger Count</legend>
+        <legend className="font-semibold text-sm">Passenger Count (Max - 10)</legend>
         <input
           type="number"
           className="input validator focus-within:outline-0 w-full"
