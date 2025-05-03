@@ -4,7 +4,7 @@ const ContactSummaryCard = memo(function (props) {
     return (
         <article className="flex flex-col relative gap-4 p-6 bg-base-300 w-full md:flex-1/2 lg:flex-1/4 card-xl shadow-xl">
             <h1>Contact & Billing Info</h1>
-            <div className="border-2 border-gray rounded-box p-1 cursor-pointer right-5 top-5 absolute flex flex-col gap-2">
+            <div className="border-2 border-gray rounded-box p-1 px-8 cursor-pointer right-5 top-5 absolute flex flex-col gap-2">
                 <p>Edit</p>
             </div>
             <div className="flex flex-col md:flex-row gap-4 justify-between">

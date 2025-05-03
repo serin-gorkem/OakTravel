@@ -115,6 +115,10 @@ const Footer = memo(function () {
           </ul>
         </nav>
       </div>
+        <div className="flex absolute bottom-0 h-7 w-full justify-between px-8 text-base-100 bg-[#2C3A44]">
+          <p>Website Designed by Crehera Web Agency</p>
+          <p>© Copyright 2025 All rights reserved to OAK Travel Group</p>
+        </div>
     </footer>
   );
 });

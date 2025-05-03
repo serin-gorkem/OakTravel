@@ -39,7 +39,7 @@ const FAQ = memo(function () {
         <p className="text-xs md:text-lg">
         Please contact with our support team, we’re happy to help!
         </p>
-        <button className="btn btn-outline btn-lg"> Contact Us</button>
+        <button className="btn btn-outline px-8 btn-lg"> Contact Us</button>
       </div>
     </section>
   );
