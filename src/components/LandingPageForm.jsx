@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import {
   GoogleMap,
@@ -29,34 +29,49 @@ const LandingPageForm = memo(function () {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
   });
-  const options = {
-    types: ["establishment"],
-    componentRestrictions: { country: "tr" },
-  };
-  
-  const handleOnPlacesChanged = (ref,setLocation) => {
+
+  const options = useMemo(
+    () => ({
+      types: ["airport"],
+      componentRestrictions: { country: "tr" },
+    }),
+    []
+  );
+
+  const handleOnPlacesChanged = useCallback((ref, setLocation) => {
     if (!ref.current) return;
     const places = ref.current.getPlaces();
     if (!places || places.length === 0) return;
-  
-    const place = places[0];
 
+    const place = places[0];
     if (place.types?.includes("airport")) {
       setLocation(place.formatted_address || place.name);
     } else {
       alert("Please select an airport.");
       setLocation("");
     }
-  };
+  }, []);
   const handleReturnTripChange = (event) => {
     setReturnTrip(event.target.checked);
     console.log("Return trip selected:", event.target.checked);
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({
+      pickupLocation,
+      dropOffLocation,
+      pickupDate,
+      passengerCount,
+      returnTrip,
+      returnDate: returnTrip ? returnDate : null,
+      returnPassengerCount: returnTrip ? returnPassengerCount : null,
+    });
+  };
   return (
     <>
       {isLoaded && (
         <form className="bg-base-300 w-full rounded-box p-5 flex flex-col justify-between h-fit gap-3 shadow-xl ">
+        <label>We only operate on Turkey.</label>
           <fieldset className="flex gap-3 w-fit">
             <input
               type="checkbox"
@@ -90,20 +105,22 @@ const LandingPageForm = memo(function () {
                 />
               </svg>
               <div className="w-full">
-              <StandaloneSearchBox
-                onLoad={(ref) => (pickupPlaceRef.current = ref)}
-                onPlacesChanged={() => handleOnPlacesChanged(pickupPlaceRef,setPickupLocation)}
-                options={options} 
-              >
-                <input
-                  type="text"
-                  id="autocomplete"
-                  value={pickupLocation}
-                  required={true}
-                  onChange={(e) => setPickupLocation(e.target.value)}
-                  placeholder="Address,airport,hotel..."
-                />
-              </StandaloneSearchBox>
+                <StandaloneSearchBox
+                  onLoad={(ref) => (pickupPlaceRef.current = ref)}
+                  onPlacesChanged={() =>
+                    handleOnPlacesChanged(pickupPlaceRef, setPickupLocation)
+                  }
+                  options={options}
+                >
+                  <input
+                    type="text"
+                    id="autocomplete"
+                    value={pickupLocation}
+                    required={true}
+                    onChange={(e) => setPickupLocation(e.target.value)}
+                    placeholder="Address,airport,hotel..."
+                  />
+                </StandaloneSearchBox>
               </div>
             </label>
           </fieldset>
@@ -130,19 +147,21 @@ const LandingPageForm = memo(function () {
                 />
               </svg>
               <div className="w-full">
-              <StandaloneSearchBox
-                onLoad={(ref) => (dropOffPlaceRef.current = ref)}
-                onPlacesChanged={() => handleOnPlacesChanged(dropOffPlaceRef,setDropOffLocation)}
-                options={options} 
-              >
-                <input
-                  type="text"
-                  value={dropOffLocation}
-                  required={true}
-                  onChange={(e) => setDropOffLocation(e.target.value)}
-                  placeholder="Address,airport,hotel..."
-                />
-              </StandaloneSearchBox>
+                <StandaloneSearchBox
+                  onLoad={(ref) => (dropOffPlaceRef.current = ref)}
+                  onPlacesChanged={() =>
+                    handleOnPlacesChanged(dropOffPlaceRef, setDropOffLocation)
+                  }
+                  options={options}
+                >
+                  <input
+                    type="text"
+                    value={dropOffLocation}
+                    required={true}
+                    onChange={(e) => setDropOffLocation(e.target.value)}
+                    placeholder="Address,airport,hotel..."
+                  />
+                </StandaloneSearchBox>
               </div>
             </label>
           </fieldset>
@@ -172,7 +191,7 @@ const LandingPageForm = memo(function () {
               max="10"
               title="Passenger Count"
               value={passengerCount}
-              onChange={(e) => setPassengerCount(e.target.value)}
+              onChange={(e) => setPassengerCount(parseInt(e.target.value))}
             />
           </fieldset>
           {returnTrip && (
@@ -202,12 +221,18 @@ const LandingPageForm = memo(function () {
                   max="10"
                   title="Passenger Count"
                   value={returnPassengerCount}
-                  onChange={(e) => setReturnPassengerCount(e.target.value)}
+                  onChange={(e) =>
+                    setReturnPassengerCount(parseInt(e.target.value))
+                  }
                 />
               </fieldset>
             </>
           )}
-          <button type="submit" className="btn btn-primary w-full hover:bg-white hover:text-primary">
+          <button
+            type="submit"
+            className="btn btn-primary w-full hover:bg-white hover:text-primary"
+            onSubmit={handleSubmit}
+          >
             <Link
               smooth
               to="vehicle-features"
