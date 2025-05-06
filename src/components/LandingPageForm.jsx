@@ -20,14 +20,6 @@ const LandingPageForm = memo(function () {
   const [returnDate, setReturnDate] = useState("");
   const [returnPassengerCount, setReturnPassengerCount] = useState(1);
 
-  localStorage.setItem("pickupLocation", pickupLocation);
-  localStorage.setItem("dropOffLocation", dropOffLocation);
-  localStorage.setItem("pickupDate", pickupDate);
-  localStorage.setItem("passengerCount", passengerCount);
-  localStorage.setItem("returnDate", returnDate);
-  localStorage.setItem("returnPassengerCount", returnPassengerCount);
-  localStorage.setItem("returnTrip", returnTrip);
-
   const pickupPlaceRef = useRef(null);
   const dropOffPlaceRef = useRef(null);
 
@@ -60,16 +52,6 @@ const LandingPageForm = memo(function () {
     setReturnTrip(event.target.checked);
     console.log("Return trip selected:", event.target.checked);
   };
-
-  // console.log("Pickup Location:", pickupLocation);
-  // console.log("Drop-off Location:", dropOffLocation);
-  // console.log("Pickup Date:", pickupDate.toString().slice(0, 10));
-  // console.log("Pickup Time:", pickupDate.toString().slice(11, 16));
-  // console.log("Passenger Count:", passengerCount);
-  // console.log("Return Date:", returnDate.toString().slice(0, 10));
-  // console.log("Return Time:", returnDate.toString().slice(11, 16));
-  // console.log("Return Passenger Count:", returnPassengerCount);
-  // console.log("Return Trip:", returnTrip);
 
   return (
     <>
