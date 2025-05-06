@@ -1,6 +1,6 @@
 import { lazy, memo } from "react";
 
-const VehicleCard = lazy(() => import("../components/VehicleCard"));
+const VehicleCard = lazy(() => import("../components/Landing/VehicleCard"));
 import CarVitoIMG from "../assets/img/vehicles/vito.webp";
 
 const Vehicles = memo(function () {

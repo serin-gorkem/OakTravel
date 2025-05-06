@@ -1,5 +1,5 @@
 import { lazy, memo } from "react";
-const SpecsCard = lazy(() => import("../components/SpecsCard"));
+const SpecsCard = lazy(() => import("../components/Landing/SpecsCard"));
 
 const ChooseUs = memo(function () {
   const cardsList = cardInfo.map((card) => {

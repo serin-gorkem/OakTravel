@@ -10,15 +10,15 @@ const Footer = lazy(() => import("./sections/Footer"));
 const Nav = lazy(() => import("./components/Nav"));
 const Steps = lazy(() => import("./sections/Steps"));
 const PageIndicator = lazy(() => import("./components/PageIndicator"));
-const SummaryCard = lazy(() => import("./components/SummaryCard"));
-const ContactSummaryCard = lazy(() => import("./components/ContactSummaryCard"));
+const SummaryCard = lazy(() => import("./components/Extras/SummaryCard"));
+const ContactSummaryCard = lazy(() => import("./components/Summary/ContactSummaryCard"));
 
 {
     /* API Keys and images import */
 }
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 import CarVitoIMG from "./assets/img/vehicles/vito.webp";
-import RideDetails from "./components/RideDetailsCard";
+import RideDetails from "./components/Landing/RideDetailsCard";
 
 {
     /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */

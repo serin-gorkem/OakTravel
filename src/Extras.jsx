@@ -10,7 +10,7 @@ const Footer = lazy(() => import("./sections/Footer"));
 const Nav = lazy(() => import("./components/Nav"));
 const Steps = lazy(() => import("./sections/Steps"));
 const PageIndicator = lazy(() => import("./components/PageIndicator"));
-const SummaryCard = lazy(() => import("./components/SummaryCard"));
+const SummaryCard = lazy(() => import("./components/Extras/SummaryCard"));
 
 {
   /* API Keys and images import */
@@ -18,7 +18,7 @@ const SummaryCard = lazy(() => import("./components/SummaryCard"));
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 import CarVitoIMG from "./assets/img/vehicles/vito.webp";
-import ExtrasCard from "./components/ExtrasCard";
+import ExtrasCard from "./components/Extras/ExtrasCard";
 
 {
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */

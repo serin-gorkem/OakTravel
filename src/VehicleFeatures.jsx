@@ -8,13 +8,13 @@ import { lazy, memo } from "react";
 }
 const Footer = lazy(() => import("./sections/Footer"));
 const TransferSummaryCard = lazy(() =>
-  import("./components/TransferSummaryCard")
+  import("./components/Vehicle-Features/TransferSummaryCard")
 );
 const Nav = lazy(() => import("./components/Nav"));
 const Steps = lazy(() => import("./sections/Steps"));
 const PageIndicator = lazy(() => import("./components/PageIndicator"));
 const VehicleFeaturesCard = lazy(() =>
-  import("./components/VehicleFeaturesCard")
+  import("./components/Vehicle-Features/VehicleFeaturesCard")
 );
 
 {
@@ -28,6 +28,18 @@ import CarVitoIMG from "./assets/img/vehicles/vito.webp";
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
 }
 const VehicleFeatures = memo(function () {
+
+  const from_destination = localStorage.getItem("pickupLocation");
+  const from_city = localStorage.getItem("pickupCity");
+  const to_destination = localStorage.getItem("dropOffLocation");
+  const to_city = localStorage.getItem("dropOffCity");
+  const departure_date = localStorage.getItem("pickupDate");
+  const departure_hour = localStorage.getItem("pickupHour");
+  const return_date = localStorage.getItem("returnDate");
+  const return_hour = localStorage.getItem("returnHour");
+  const outward_count = localStorage.getItem("passengerCount");
+  const return_count = localStorage.getItem("returnPassengerCount");
+
   return (
     <>
       <Nav isBookingPage={true} />
@@ -38,16 +50,16 @@ const VehicleFeatures = memo(function () {
           </div>
           <aside className="flex flex-col gap-3 xl:w-3/12 lg:w-5/12">
             <TransferSummaryCard
-              from_destination="Bodrum Airport (BJV)"
-              from_city="Bodrum,Turkey"
-              to_destination="Adnan Menderes Airport (ADB)"
-              to_city="Izmir, Turkey"
-              departure_date="03 March 2025"
-              departure_hour="13:45 (1:45 pm)"
-              return_date="06 March 2025"
-              return_hour="11:45 (11:45 am)"
-              outward_count={2}
-              return_count={2}
+              from_destination={from_destination}
+              from_city={from_city}
+              to_destination={to_destination}
+              to_city={to_city}
+              departure_date={departure_date}
+              departure_hour={departure_hour}
+              return_date={return_date}
+              return_hour={return_hour}
+              outward_count={outward_count}
+              return_count={return_count}
               total_distance={189}
               total_hour="2h 43m"
             />
@@ -125,7 +137,7 @@ const VehicleFeatures = memo(function () {
             <div className="hidden lg:block">
               <PageIndicator />
             </div>
-            <div className="w-full h-96 hidden md:block">
+            <div className="w-full z-0 h-96 hidden md:block">
               <APIProvider apiKey={API_KEY}>
                 <Map
                   className="size-full"

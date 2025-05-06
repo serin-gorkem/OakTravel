@@ -1,7 +1,7 @@
 {
   /* React imports */
 }
-import { lazy, memo, useState } from "react";
+import { lazy, memo } from "react";
 
 {
   /* Lazy Loadings */
@@ -10,7 +10,7 @@ const Footer = lazy(() => import("./sections/Footer"));
 const Nav = lazy(() => import("./components/Nav"));
 const Steps = lazy(() => import("./sections/Steps"));
 const PageIndicator = lazy(() => import("./components/PageIndicator"));
-const SummaryCard = lazy(() => import("./components/SummaryCard"));
+const SummaryCard = lazy(() => import("./components/Extras/SummaryCard"));
 
 {
   /* API Keys and images import */
