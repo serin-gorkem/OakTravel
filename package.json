@@ -15,9 +15,11 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@react-google-maps/api": "^2.20.6",
+    "@splidejs/react-splide": "^0.7.12",
     "@tailwindcss/vite": "^4.0.12",
     "@vis.gl/react-google-maps": "^1.5.2",
     "dotenv": "^16.4.7",
+    "embla-carousel-react": "^8.6.0",
     "gh-pages": "^6.3.0",
     "react": "^19.0.0",
     "react-day-picker": "^9.6.4",
