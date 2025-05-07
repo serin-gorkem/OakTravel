@@ -6,7 +6,7 @@ export function ReturnTripForm({
   handleReturnTrip,
   returnHour,
   handleDaySelect,
-  personCount,
+  returnPersonCount,
   handlePersonCount,
   handleTimeChange,
   confirmReturn,
@@ -47,7 +47,7 @@ export function ReturnTripForm({
             placeholder="Passengers (1-10)"
             min="1"
             max="10"
-            value={personCount}
+            value={returnPersonCount}
             onChange={handlePersonCount}
             title="Passenger Count"
           />

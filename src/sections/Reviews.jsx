@@ -25,40 +25,7 @@ const Reviews = memo(function () {
           See what our customers said
         </h1>
       </figure>
-      <div className="flex gap-2 pb-8">
-        <button aria-label="change reviews left" className="btn btn-circle text-warning w-14 h-14 shadow-md">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 19.5 8.25 12l7.5-7.5"
-            />
-          </svg>
-        </button>
-        <button aria-label="change reviews right" className="btn btn-circle text-warning w-14 h-14 shadow-md">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m8.25 4.5 7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </button>
-      </div>
+
       <div className="flex flex-col flex-wrap lg:flex-row gap-5">
         {reviewList}
       </div>

@@ -3,7 +3,7 @@ import { HashLink as Link } from "react-router-hash-link";
 
 const Footer = memo(function () {
   return (
-    <footer className="bg-primary py-12 relative w-screen right-1/2 left-1/2 -translate-x-1/2 ">
+    <footer className="bg-primary relative pt-8 w-screen right-1/2 left-1/2 -translate-x-1/2 ">
       <div className="footer sm:footer-horizontal xl:max-w-9/12 lg:max-w-11/12 lg:px-0 sm:px-4 px-2  mx-auto text-neutral-content">
         <div>
           <h1 className="text-2xl text-base-300 font-bold">Oak Travel</h1>
@@ -115,9 +115,9 @@ const Footer = memo(function () {
           </ul>
         </nav>
       </div>
-        <div className="flex absolute bottom-0 h-7 w-full justify-between px-8 text-base-100 bg-[#2C3A44]">
-          <p>Website Designed by Crehera Web Agency</p>
-          <p>© Copyright 2025 All rights reserved to OAK Travel Group</p>
+        <div className="flex flex-col sm:flex-row gap-2 xl:max-w-9/12 lg:max-w-11/12 mx-auto w-full justify-between py-2 text-base-100 bg-primary">
+          <p className=" opacity-60 sm:text-base text-xs">Website Designed by Crehera Web Agency</p>
+          <p className=" opacity-60 sm:text-base text-xs">© Copyright 2025 All rights reserved to OAK Travel Group</p>
         </div>
     </footer>
   );

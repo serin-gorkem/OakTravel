@@ -5,6 +5,7 @@ const Nav = lazy(() => import("../components/Nav"));
 const LandingPageForm = lazy(() => import("../components/Landing/LandingPageForm"));
 const Stars = lazy(() => import("../components/Landing/Stars"));
 const Home = memo(function () {
+  localStorage.clear();
   return (
     <section id="home" className="h-fit border-red-500 flex flex-col relative sm:gap-5 lg:gap-10">
       <Nav isBookingPage={false} />

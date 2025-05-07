@@ -11,7 +11,7 @@ const TransferSummaryCard = lazy(() =>
   import("./components/Vehicle-Features/TransferSummaryCard")
 );
 const Nav = lazy(() => import("./components/Nav"));
-const Steps = lazy(() => import("./sections/Steps"));
+import Steps from "./sections/Steps";
 const PageIndicator = lazy(() => import("./components/PageIndicator"));
 const VehicleFeaturesCard = lazy(() =>
   import("./components/Vehicle-Features/VehicleFeaturesCard")
@@ -20,25 +20,88 @@ const VehicleFeaturesCard = lazy(() =>
 {
   /* API Keys and images import */
 }
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
-const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
+const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 import CarVitoIMG from "./assets/img/vehicles/vito.webp";
+import {
+  GoogleMap,
+  useJsApiLoader,
+  Marker,
+  Polyline,
+} from "@react-google-maps/api";
 
 {
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
 }
 const VehicleFeatures = memo(function () {
+  let savedVariables;
+  try {
+    const data = localStorage.getItem("formVariables");
+    savedVariables = data ? JSON.parse(data) : {};
+  } catch (error) {
+    console.error("Error parsing formVariables from localStorage:", error);
+    savedVariables = {};
+  }
+  const libraries = ["places","geometry"];
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || (() => {
+      console.error("Google Maps API key is missing. Please set VITE_GOOGLE_MAPS_API_KEY in your environment.");
+      return ""; // Provide a fallback or empty string
+    })(),
+    libraries: libraries,
+  });
+  const containerStyle = {
+    width: "100%",
+    height: "23rem",
+  };
 
-  const from_destination = localStorage.getItem("pickupLocation");
-  const from_city = localStorage.getItem("pickupCity");
-  const to_destination = localStorage.getItem("dropOffLocation");
-  const to_city = localStorage.getItem("dropOffCity");
-  const departure_date = localStorage.getItem("pickupDate");
-  const departure_hour = localStorage.getItem("pickupHour");
-  const return_date = localStorage.getItem("returnDate");
-  const return_hour = localStorage.getItem("returnHour");
-  const outward_count = localStorage.getItem("passengerCount");
-  const return_count = localStorage.getItem("returnPassengerCount");
+  const center = {
+      lat: savedVariables.pickupLocation?.lat || 0,
+      lng: savedVariables.pickupLocation?.lng || 0,
+  };
+  
+  const positions = [
+      { lat: savedVariables.pickupLocation?.lat || 0, lng: savedVariables.pickupLocation?.lng || 0 },
+      { lat: savedVariables.dropOffLocation?.lat || 0, lng: savedVariables.dropOffLocation?.lng || 0 },
+  ];
+
+  function haversineDistance(lat1, lon1, lat2, lon2) {
+    const toRad = (value) => (value * Math.PI) / 180;
+  
+    const R = 6371; // Earth's radius (km)
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // km cinsinden
+  }
+  
+  function estimateFlightTime(distanceKm){
+    const averageSpeed = 900; // Average airplane speed (km/hour)
+    const timeHours = distanceKm / averageSpeed;
+    const hours = Math.floor(timeHours);
+    const minutes = Math.round((timeHours - hours) * 60);
+    return `${hours} h ${minutes} min`;
+  }
+  
+  // Kullanım:
+  const lat1 = savedVariables?.pickupLocation?.lat || 0;
+  const lon1 = savedVariables?.pickupLocation?.lng || 0;
+  const lat2 = savedVariables?.dropOffLocation?.lat || 0;
+  const lon2 = savedVariables?.dropOffLocation?.lng || 0;
+  
+  const distance = haversineDistance(lat1, lon1, lat2, lon2);
+  const flightDuration = estimateFlightTime(distance);
+  console.log("Uçuş mesafesi:", distance.toFixed(0), "km");
+  console.log("Tahmini uçuş süresi:", flightDuration);
+
+  const polylineOptions = {
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+  };
 
   return (
     <>
@@ -49,20 +112,7 @@ const VehicleFeatures = memo(function () {
             <PageIndicator />
           </div>
           <aside className="flex flex-col gap-3 xl:w-3/12 lg:w-5/12">
-            <TransferSummaryCard
-              from_destination={from_destination}
-              from_city={from_city}
-              to_destination={to_destination}
-              to_city={to_city}
-              departure_date={departure_date}
-              departure_hour={departure_hour}
-              return_date={return_date}
-              return_hour={return_hour}
-              outward_count={outward_count}
-              return_count={return_count}
-              total_distance={189}
-              total_hour="2h 43m"
-            />
+            <TransferSummaryCard totalDistance={distance.toFixed(0)} flightDuration={flightDuration} />
             <div className="hidden lg:block rounded-box bg-base-300 p-2">
               <div className="flex items-center gap-2">
                 <svg
@@ -84,7 +134,7 @@ const VehicleFeatures = memo(function () {
               <div className="divider my-2"></div>
               <div className="flex items-center gap-2">
                 <a
-                  href="https://api.whatsapp.com/send?phone=905540161923"
+                  href={`https://api.whatsapp.com/send?phone=${import.meta.env.VITE_WHATSAPP_PHONE}`}
                   aria-label="whatsapp link"
                   className=" text-primary size-10"
                 >
@@ -126,8 +176,8 @@ const VehicleFeatures = memo(function () {
                     d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
                   />
                 </svg>
-                <a href="0090 256 999 16 19" className="text-xs lg:text-base">
-                  0090 256 999 16 19
+                <a href= {`${import.meta.env.VITE_WHATSAPP_PHONE}`} className="text-xs lg:text-base">
+                  {`${import.meta.env.VITE_WHATSAPP_PHONE}`}
                 </a>
               </div>
               <div className="divider my-2"></div>
@@ -138,15 +188,22 @@ const VehicleFeatures = memo(function () {
               <PageIndicator />
             </div>
             <div className="w-full z-0 h-96 hidden md:block">
-              <APIProvider apiKey={API_KEY}>
-                <Map
-                  className="size-full"
-                  defaultCenter={{ lat: 22.54992, lng: 0 }}
-                  defaultZoom={3}
-                  gestureHandling={"greedy"}
-                  disableDefaultUI={true}
-                />
-              </APIProvider>
+              {isLoaded && (
+                <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={center}
+                  zoom={7}
+                  options={{
+                    mapId: "b004964ef53350d0",
+                    disableDefaultUI: true,
+                  }}
+                >
+                  {positions.map((pos, index) => (
+                    <Marker key={index} position={pos} />
+                  ))}
+                  <Polyline path={positions} options={polylineOptions} />
+                </GoogleMap>
+              )}
             </div>
             <VehicleFeaturesCard
               img={CarVitoIMG}
@@ -181,7 +238,7 @@ const VehicleFeatures = memo(function () {
               <div className="flex flex-col gap-2">
                 <h2 className="text-xl md:text-2xl"> Free Cancellation</h2>
                 <p className="text-sm md:text-base md:w-4/5 opacity-80">
-                  Book today, lock the price. You can cancel for free within the{" "}
+                  Book today, lock the price. You can cancel for free within the
                   <span className="text-primary ">02 March 2025</span> and get a
                   full refund of the transfer.
                 </p>

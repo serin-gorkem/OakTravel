@@ -3,9 +3,9 @@ import { useState } from "react";
 export function useLandingPageFormState() {
     const [shouldShowReturnUI, setWantsReturnTrip] = useState(false);
     const [pickupLocation, setPickupLocation] = useState("");
-    const [pickupCity, setPickupCity] = useState("");
+    const [pickupInput, setPickupInput] = useState("");
     const [dropOffLocation, setDropOffLocation] = useState("");
-    const [dropOffCity, setDropOffCity] = useState("");
+    const [dropOffInput, setDropOffInput] = useState("");
     const [passengerCount, setPassengerCount] = useState(1);
   
     const [returnDate, setReturnDate] = useState("");
@@ -25,12 +25,12 @@ export function useLandingPageFormState() {
     setWantsReturnTrip,
     pickupLocation,
     setPickupLocation,
-    pickupCity,
-    setPickupCity,
+    pickupInput,
+    setPickupInput,
     dropOffLocation,
     setDropOffLocation,
-    dropOffCity,
-    setDropOffCity,
+    dropOffInput,
+    setDropOffInput,
     passengerCount,
     setPassengerCount,
     returnDate,

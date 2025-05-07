@@ -1,28 +1,57 @@
-import { memo, useCallback, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import  { useLandingPageFormState } from "../../hooks/useLandingPageFormState";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import {
-  GoogleMap,
+  Autocomplete,
   useJsApiLoader,
-  StandaloneSearchBox,
 } from "@react-google-maps/api";
 
+/**
+ * LandingPageForm is a memoized React functional component that renders a form for booking a transfer service.
+ * It includes fields for pickup and drop-off locations, dates, times, passenger counts, and an optional return trip.
+ * The component integrates with the Google Maps Places API for location autocomplete functionality.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered form component.
+ *
+ * @example
+ * <LandingPageForm />
+ *
+ * @description
+ * The form includes the following features:
+ * - Pickup and drop-off location inputs with Google Maps Places API autocomplete.
+ * - Date and time pickers for both pickup and return trips.
+ * - Passenger count inputs with validation.
+ * - Toggle for enabling/disabling a return trip.
+ * - Validation to ensure all required fields are filled and pickup/drop-off locations are different.
+ * - Saves form data to localStorage and navigates to the "vehicle-features" page upon submission.
+ *
+ * @requires useLandingPageFormState - Custom hook for managing form state.
+ * @requires useJsApiLoader - Hook for loading the Google Maps JavaScript API.
+ * @requires useNavigate - React Router hook for navigation.
+ * @requires Autocomplete - Google Maps Places API Autocomplete component.
+ * @requires DayPicker - Component for selecting dates.
+ *
+ * @dependencies
+ * - Google Maps JavaScript API (requires a valid API key).
+ * - React Router for navigation.
+ * - LocalStorage for saving form data.
+ *
+ * @note
+ * - The component assumes the Google Maps API key is provided via the `VITE_GOOGLE_MAPS_API_KEY` environment variable.
+ * - The form only supports locations within Turkey.
+ */
 const LandingPageForm = memo(function () {
-  // States and variables
     const {
       shouldShowReturnUI,
       setWantsReturnTrip,
       pickupLocation,
       setPickupLocation,
-      pickupCity,
-      setPickupCity,
       dropOffLocation,
       setDropOffLocation,
-      dropOffCity,
-      setDropOffCity,
       passengerCount,
       setPassengerCount,
       returnDate,
@@ -49,20 +78,26 @@ const LandingPageForm = memo(function () {
   const toggleReturnDateMenu = () => {
     setReturnOpen((prev) => !prev);
   };
-
-  const pickupPlaceRef = useRef(null);
-  const dropOffPlaceRef = useRef(null);
-
-  const libraries = ["places"];
+  const libraries = ["places","geometry"];
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || (() => {
+      console.error("Google Maps API key is missing. Please set VITE_GOOGLE_MAPS_API_KEY in your environment.");
+      return ""; // Provide a fallback or empty string
+    })(),
     libraries: libraries,
   });
 
   const options = useMemo(
     () => ({
       types: ["airport"],
+      componentRestrictions: { country: "tr" },
+    }),
+    []
+  );
+  const DropoOffoptions = useMemo(
+    () => ({
+      componentRestrictions: { country: "tr" },
     }),
     []
   );
@@ -86,75 +121,79 @@ const LandingPageForm = memo(function () {
     setReturnDate(newDate);
   }
 
-  const handleOnPlacesChanged = useCallback((ref, setLocation, setCity) => {
-    if (!ref.current) return;
-    const places = ref.current.getPlaces();
-    if (!places || places.length === 0) return;
-
-    const place = places[0];
-    if (place.types?.includes("airport")) {
-      setLocation(place.name);
-      setCity(place.formatted_address);
-    } else {
-      alert("Please select an airport.");
-      setLocation("");
-    }
-  }, []);
   const handleReturnTripChange = (event) => {
     setWantsReturnTrip(event.target.checked);
-    console.log("Return trip selected:", event.target.checked);
   };
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({
+  const validateForm = () => {
+    if (!pickupLocation || !dropOffLocation || !pickupDate || !pickupHour || !passengerCount) {
+      setErrorText("Please fill in all fields.");
+      return false;
+    }
+    if (pickupLocation === dropOffLocation) {
+      if(pickupLocation === "" || dropOffLocation === ""){
+        setErrorText("Please fill in location fields.");
+        return false;
+      }
+      setErrorText("Pickup and drop-off locations cannot be the same.");
+      return false;
+    }
+    if (shouldShowReturnUI) {
+      if (!returnDate || !returnHour || !returnPassengerCount) {
+        setErrorText("Please fill in all return fields.");
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const saveFormVariables = () => {
+    const variables = {
       pickupLocation,
-      pickupCity,
       dropOffLocation,
-      dropOffCity,
       pickupDate,
       pickupHour,
       passengerCount,
-      wantsReturnTrip: !shouldShowReturnUI,
-      returnDate: shouldShowReturnUI ? returnDate : null,
-      returnHour: shouldShowReturnUI ? returnHour : null,
-      returnPassengerCount: shouldShowReturnUI ? returnPassengerCount : null,
-    });
-
-    if(!pickupLocation || !pickupCity || !dropOffLocation || !dropOffCity || !pickupDate || !pickupHour || !passengerCount) {
-      setErrorText("Please fill in all fields.");
-      return;
-    }
-    if(pickupLocation === dropOffLocation) {
-      setErrorText("Pickup and drop-off locations cannot be the same.");
-      return;
-    }
-    if(shouldShowReturnUI){
-      if(!returnDate || !returnHour || !returnPassengerCount) {
-        setErrorText("Please fill in all return fields.");
-        return;
-      }
-    }
-    setVariables("pickupLocation", pickupLocation);
-    setVariables("pickupCity", pickupCity);
-    setVariables("dropOffLocation", dropOffLocation);
-    setVariables("dropOffCity", dropOffCity);
-    setVariables("pickupDate", pickupDate);
-    setVariables("pickupHour", pickupHour);
-    setVariables("passengerCount", passengerCount);
-    setVariables("shouldShowReturnUI", !shouldShowReturnUI);
-    setVariables("returnDate", returnDate);
-    setVariables("returnHour", returnHour);
-    setVariables("returnPassengerCount", returnPassengerCount);
-
-    navigate("vehicle-features");
+      shouldShowReturnUI: !shouldShowReturnUI,
+      returnDate,
+      returnHour,
+      returnPassengerCount,
+    };
+    localStorage.setItem("formVariables", JSON.stringify(variables));
   };
 
-  function setVariables(variableName, variableValue) {
-    localStorage.setItem(variableName, variableValue);
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    saveFormVariables();
+    navigate("vehicle-features");
+  };
+  const autocompletePickupRef = useRef(null);
+  const autocompleteDropRef = useRef(null);
+
+  const handlePlaceChanged = (refType,setPlaceType) => {
+    const place = refType.current.getPlace();
+    if (!place.geometry){
+      setPlaceType("");
+      return;
+    }
+
+    const location = place.geometry.location;
+    setPlaceType({
+      lat: location.lat(),
+      lng: location.lng(),
+      name: place.name,
+      address: place.formatted_address
+    });
+    console.log(place.formatted_address);
+    console.log(location.lat());
+    console.log(location.lng());
+  };
+
 
   return (
     <>
@@ -163,7 +202,7 @@ const LandingPageForm = memo(function () {
           className="bg-base-300 w-full rounded-box p-5 flex flex-col justify-between h-fit gap-3 shadow-xl"
           onSubmit={handleSubmit}
         >
-        <p className="font-semibold text-red-500" >{errorText}</p>
+          <p className="font-semibold text-red-500">{errorText}</p>
           <fieldset className="flex gap-3 w-fit">
             <input
               type="checkbox"
@@ -175,7 +214,9 @@ const LandingPageForm = memo(function () {
             <p>I want a return transfer.</p>
           </fieldset>
           <fieldset className="fieldset">
-            <legend className="font-semibold text-sm">From (We only operate on Turkey.)</legend>
+            <legend className="font-semibold text-sm">
+              From (We only operate on Turkey.)
+            </legend>
             <label className="input  focus-within:outline-0 w-full ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -197,31 +238,27 @@ const LandingPageForm = memo(function () {
                 />
               </svg>
               <div className="w-full">
-                <StandaloneSearchBox
-                  onLoad={(ref) => (pickupPlaceRef.current = ref)}
-                  onPlacesChanged={() =>
-                    handleOnPlacesChanged(
-                      pickupPlaceRef,
-                      setPickupLocation,
-                      setPickupCity
-                    )
-                  }
-                  options={options}
-                >
-                  <input
+                  <Autocomplete
+                    onLoad={(ref) => (autocompletePickupRef.current = ref)}
+                    onPlaceChanged={() =>handlePlaceChanged(autocompletePickupRef,setPickupLocation)}
+                    options={options}
+                  >
+                    <input
                     type="text"
                     id="autocomplete"
                     required={true}
-                    value={pickupLocation}
+                    value={pickupLocation.name}
                     onChange={(e) => setPickupLocation(e.target.value)}
-                    placeholder="Address,airport,hotel..."
-                  />
-                </StandaloneSearchBox>
+                    placeholder="Airport"
+                    />
+                  </Autocomplete>
               </div>
             </label>
           </fieldset>
           <fieldset className="fieldset ">
-            <legend className="font-semibold text-sm">To (We only operate on Turkey.)</legend>
+            <legend className="font-semibold text-sm">
+              To (We only operate on Turkey.)
+            </legend>
             <label className="input focus-within:outline-0 w-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -243,25 +280,20 @@ const LandingPageForm = memo(function () {
                 />
               </svg>
               <div className="w-full">
-                <StandaloneSearchBox
-                  onLoad={(ref) => (dropOffPlaceRef.current = ref)}
-                  onPlacesChanged={() =>
-                    handleOnPlacesChanged(
-                      dropOffPlaceRef,
-                      setDropOffLocation,
-                      setDropOffCity
-                    )
-                  }
-                  options={options}
-                >
-                  <input
+              <Autocomplete
+                    onLoad={(ref) => (autocompleteDropRef.current = ref)}
+                    onPlaceChanged={() =>handlePlaceChanged(autocompleteDropRef,setDropOffLocation)}
+                    options={DropoOffoptions}
+                  >
+                    <input
                     type="text"
-                    value={dropOffLocation}
+                    id="autocomplete"
                     required={true}
+                    value={dropOffLocation.name}
                     onChange={(e) => setDropOffLocation(e.target.value)}
                     placeholder="Address,airport,hotel..."
-                  />
-                </StandaloneSearchBox>
+                    />
+                  </Autocomplete>
               </div>
             </label>
           </fieldset>
@@ -333,6 +365,7 @@ const LandingPageForm = memo(function () {
                       />
                       <input
                         type="time"
+                        required
                         className="input focus-within:outline-0 w-full text-primary"
                         value={returnHour}
                         onChange={handleReturnTimeChange}
@@ -354,15 +387,14 @@ const LandingPageForm = memo(function () {
                   title="Passenger Count"
                   value={returnPassengerCount}
                   onChange={(e) =>
-                    setReturnPassengerCount(parseInt(e.target.value))
+                    setReturnPassengerCount(parseInt(e.target.value, 10))
                   }
                 />
               </fieldset>
             </>
           )}
           <button
-            type="submit"
-            className="btn btn-primary w-full hover:bg-white hover:text-primary"
+            className="btn btn-primary w-full hover:bg-gray-200 hover:text-black"
           >
             Search
           </button>

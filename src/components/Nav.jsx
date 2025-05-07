@@ -10,7 +10,7 @@ function Nav(props) {
       className="w-full"
       onClick={() => setSelectedCurrency(currency)}
     >
-      <a className="p-2 px-1 w-full">
+      <a className="p-2 px-1 w-full ">
         {currency.svg}
         <p>{currency.name}</p>
       </a>
@@ -120,12 +120,12 @@ function MobileNav(props) {
           <ul className=" p-2 flex justify-between items-center">
             <li>
               <Link to="/OakTravel">
-                <h1 className="text-base-100 text-3xl hover:text-warning transition-all ">
+                <h1 className="text-black text-xl hover:text-warning transition-all ">
                   OAK TRAVEL
                 </h1>
               </Link>
             </li>
-            <li className="flex items-center gap-4">
+            <li className="flex items-center  gap-4">
               {/* Whatsapp Icon */}
               <a
                 href="https://api.whatsapp.com/send?phone=905540161923"
@@ -185,7 +185,7 @@ function MobileNav(props) {
           </div>
         </div>
       ) : (
-        <div className=" sm:hidden ">
+        <div className="sm:hidden">
           <ul className="p-2 flex justify-between items-center">
             <li>
               <a href="#">
@@ -194,12 +194,12 @@ function MobileNav(props) {
             </li>
             <li className="flex items-center gap-4">
               <div className="dropdown">
-                <div tabIndex={0} role="button" className=" m-1">
+                <div tabIndex={0} role="button" className="m-1">
                   {props.currencySvg}
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu dropdown-content mt-2 bg-base-300 right-1/2 left-1/2 -translate-x-1/2 rounded-box w-32 flex justify-center items-center shadow-sm"
+                  className="menu dropdown-content mt-2 bg-base-300 right-1/2 left-1/2 -translate-x-1/2 rounded-box flex justify-center items-center shadow-sm"
                 >
                   {props.renderCurrencyList}
                 </ul>
@@ -208,10 +208,11 @@ function MobileNav(props) {
               <a
                 href="https://api.whatsapp.com/send?phone=905540161923"
                 aria-label="whatsapp link"
+                className="size-8 sm:size-10"
               >
                 <svg
                   viewBox="0 0 24 24"
-                  className="size-8 aspect-square p-1.5 bg-white rounded-full"
+                  className="size-full aspect-square p-1.5 bg-white rounded-full"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -382,7 +383,7 @@ const currencyList = [
         viewBox="0 0 440 440"
         xmlSpace="preserve"
         stroke="#1E272E"
-        className="size-10 aspect-square p-2 bg-white rounded-full"
+        className="size-8 sm:size-10 aspect-square p-2 bg-white rounded-full"
       >
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g
@@ -402,7 +403,7 @@ const currencyList = [
         id="Layer_1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 440 440"
-        className="size-10 sm:h-10 aspect-square p-2 bg-primary text-base-300 rounded-full"
+        className="size-8 sm:size-10 sm:h-10 aspect-square p-2 bg-primary text-base-300 rounded-full"
         stroke="#ffffff"
       >
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -427,7 +428,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-10 aspect-square p-1 bg-white rounded-full"
+        className="size-8 sm:size-10 aspect-square p-1 bg-white rounded-full"
       >
         <path
           strokeLinecap="round"
@@ -443,7 +444,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
+        className="size-8 sm:size-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
       >
         <path
           strokeLinecap="round"
@@ -463,7 +464,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-10 aspect-square p-1 bg-white rounded-full"
+        className="size-8 sm:size-10  aspect-square p-1 bg-white rounded-full"
       >
         <path
           strokeLinecap="round"
@@ -479,7 +480,7 @@ const currencyList = [
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="size-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
+        className="size-8 sm:size-10 aspect-square p-1 bg-primary text-base-300 rounded-full"
       >
         <path
           strokeLinecap="round"
