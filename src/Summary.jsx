@@ -27,13 +27,20 @@ import { useNavigate } from "react-router";
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
 }
 const Summary = memo(function () {
+  const navigate = useNavigate();
 
-  
-      const navigate = useNavigate();
-  
-      function navigateToDetails(){
-        navigate("/details");
-      }
+  function navigateToDetails() {
+    navigate("/details");
+  }
+  function navigateToPersonalDetails() {
+    navigate("/details");
+  }
+  function navigateToVehicleFeatures() {
+    navigate("/vehicle-features");
+  }
+  function navigateToHome() {
+    navigate("/");
+  }
   return (
     <>
       <Nav isBookingPage={true} />
@@ -43,6 +50,7 @@ const Summary = memo(function () {
             <SummaryCard
               showItems={false}
               isDetailsPage={false}
+              navigateToVehicleFeatures={navigateToVehicleFeatures}
               bags={2}
               img={CarVitoIMG}
               vehicleType={"Mercedes Vito"}
@@ -76,8 +84,11 @@ const Summary = memo(function () {
             <div className=" lg:flex lg:flex-col lg:gap-4">
               {/*For page indicator active functionality, later.*/}
               <PageIndicator activePage={"Details"} />
-              <ContactSummaryCard></ContactSummaryCard>
+              <ContactSummaryCard
+                navigateToPersonalDetails={navigateToPersonalDetails}
+              ></ContactSummaryCard>
               <RideDetails
+                navigateToHome={navigateToHome}
                 vehicleType={"Mercedes Vito"}
                 totalDistance={"20 km"}
                 totalTime={"30 min"}

@@ -41,7 +41,7 @@ const Details = memo(function () {
       navigate("/extras");
     }
 
-    function navigateToSummary(){
+    function handleSubmit(){
       setFormVariables({
         ...localData,
         firstName: firstName,
@@ -53,7 +53,6 @@ const Details = memo(function () {
       });
       navigate("/summary");
     }
-
   return (
     <>
       <Nav isBookingPage={true} />
@@ -78,7 +77,7 @@ const Details = memo(function () {
             <div className=" lg:flex lg:flex-col lg:gap-4">
               {/*For page indicator active functionality, later.*/}
               <PageIndicator activePage={"Details"} />
-              <form className="flex flex-col gap-4">
+              <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <div className="md:flex md:justify-between gap-2 ">
                   <fieldset className="fieldset w-full flex focus-within:outline-0">
                     <legend className="font-bold text-sm lg:text-base">
@@ -86,13 +85,12 @@ const Details = memo(function () {
                     </legend>
                     <input
                       type="text"
-                      id="name"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       autoComplete="given-name"
                       className="bg-base-300 h-10 p-2 w-full shadow-sm lg:text-base"
                       placeholder="First Name"
-                      required
+                      required = {true}
                     />
                   </fieldset>
                   <fieldset className="fieldset w-full flex focus-within:outline-0">
@@ -101,7 +99,6 @@ const Details = memo(function () {
                     </legend>
                     <input
                       type="text"
-                      id="name"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       autoComplete="family-name"
@@ -117,7 +114,6 @@ const Details = memo(function () {
                   </legend>
                   <input
                     type="text"
-                    id="name"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     autoComplete="tel"
@@ -133,7 +129,6 @@ const Details = memo(function () {
                   </legend>
                   <input
                     type="text"
-                    id="name"
                     value={flightNumber}
                     onChange={(e) => setFlightNumber(e.target.value)}
                     autoComplete="number"
@@ -148,7 +143,6 @@ const Details = memo(function () {
                   </legend>
                   <input
                     type="text"
-                    id="name"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
@@ -167,46 +161,45 @@ const Details = memo(function () {
                     onChange={(e) => setMessage(e.target.value)}
                     className="bg-base-300 h-32 w-full p-2 shadow-sm lg:text-base"
                     placeholder="Leave us a message..."
-                    required
                   />
                 </fieldset>
+                <fieldset className="sm:w-fit flex justify-between">
+                  <button type="button" onClick={navigateToExtras} className="btn w-[45%] sm:w-16 sm:px-0 md:w-full btn-gray">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
+                      />
+                    </svg>
+                    Extras
+                  </button>
+                  <button type="submit" className="btn w-[45%] sm:w-16 md:w-full btn-warning text-base-100">
+                    Booking Summary
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </button>
+                </fieldset>
               </form>
-              <div className="sm:w-fit flex justify-between">
-                <button onClick={navigateToExtras} className="btn w-[45%] sm:w-16 sm:px-0 md:w-full btn-gray">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
-                    />
-                  </svg>
-                  Extras
-                </button>
-                <button onClick={navigateToSummary} className="btn w-[45%]  sm:w-16 md:w-full btn-warning text-base-100">
-                  Booking Summary
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
-                </button>
-              </div>
             </div>
           </div>
         </section>

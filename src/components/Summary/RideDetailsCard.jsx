@@ -8,13 +8,13 @@ const RideDetails = memo(function (props) {
   console.log(localData);
 
   return (
-    <article className="flex flex-col relative gap-4 p-6 bg-base-300 w-full md:flex-1/2 lg:flex-1/4 card-xl shadow-xl">
+    <article className="flex flex-col relative gap-4 rounded-box p-6 bg-base-300 w-full md:flex-1/2 lg:flex-1/4 card-xl shadow-xl">
       <div className="map"></div>
       <div className="relative">
-        <div className="border-2 border-gray rounded-box p-1 px-8 cursor-pointer right-5 top-5 absolute flex flex-col gap-2">
+        <div onClick={props.navigateToHome} className="border-2 border-gray rounded-box p-1 px-8 cursor-pointer right-0 top-5 absolute flex flex-col gap-2">
           <p>Edit</p>
         </div>
-        <h1 className="text-2xl md:text-4xl my-3"> Transfer Details </h1>
+        <h1 className="text-xl md:text-4xl my-3"> Transfer Details </h1>
         <div className="flex flex-col">
           <h2 className="title mb-1">VEHICLE</h2>
           <p className="section-text font-bold">{props.vehicleType}</p>

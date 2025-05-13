@@ -127,7 +127,7 @@ const SummaryCard = memo(function (props) {
             <h1 className="text-xl md:text-3xl my-3">Vehicle Info</h1>
             <h2>{props.vehicleType}</h2>
             <div className="divider my-1"></div>
-            <div className="border-2 border-gray rounded-box p-1 px-8 cursor-pointer right-0 top-0 absolute flex flex-col gap-2">
+            <div onClick={props.navigateToVehicleFeatures} className="border-2 border-gray rounded-box p-1 px-8 cursor-pointer right-0 top-0 absolute flex flex-col gap-2">
               <p>Edit</p>
             </div>
             <p className="text-sm"> {props.bags} Bags</p>
