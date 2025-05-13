@@ -82,7 +82,7 @@ const ExtrasCard = memo(function (props) {
               </div>
             </div>
             <button
-              type="submit"
+              type="button"
               onClick={props.setExtrasVariable}
               className="btn btn-primary w-1/2 md:w-3/12 px-16"
             >
@@ -147,7 +147,7 @@ const ExtrasCard = memo(function (props) {
               </div>
             </div>
             <button
-              type="submit"
+              type="button"
               onClick={props.setExtrasVariable}
               className="btn btn-primary w-1/2 md:w-3/12 px-16"
             >
@@ -167,7 +167,7 @@ const ExtrasCard = memo(function (props) {
           <div className="flex flex-col md:flex-row gap-2 md:w-fit justify-between md:items-center">
             {/* Numbers Box */}
             <button
-              type="submit"
+              type="button"
               onClick={props.handleAirportAssistance}
               className="btn"
             >
@@ -188,7 +188,7 @@ const ExtrasCard = memo(function (props) {
           <div className="flex flex-col md:flex-row gap-2 md:w-fit justify-between md:items-center">
             {/* Numbers Box */}
             <button
-              type="submit"
+              type="button"
               onClick={props.handleWait}
               className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
             >
@@ -256,7 +256,7 @@ const ExtrasCard = memo(function (props) {
               </div>
             </div>
             <button
-              type="submit"
+              type="button"
               onClick={props.setExtrasVariable}
               className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
             >
@@ -321,7 +321,7 @@ const ExtrasCard = memo(function (props) {
               </div>
             </div>
             <button
-              type="submit"
+              type="button"
               onClick={props.setExtrasVariable}
               className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
             >
@@ -342,7 +342,7 @@ const ExtrasCard = memo(function (props) {
           <div className="flex items-center justify-center gap-4">
             <div className="divider divider-horizontal"></div>
             <button
-              type="submit"
+              type="button"
               onClick={props.handleAirportAssistance}
               className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
             >
@@ -364,7 +364,7 @@ const ExtrasCard = memo(function (props) {
           <div className="flex items-center justify-center gap-4">
             <div className="divider divider-horizontal "></div>
             <button
-              type="submit"
+              type="button"
               onClick={props.handleWait}
               className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
             >
