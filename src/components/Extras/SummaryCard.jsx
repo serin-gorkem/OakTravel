@@ -77,7 +77,7 @@ const SummaryCard = memo(function (props) {
                         const labelMap = {
                           childSeatNumber: "Child Seat",
                           flowersNumber: "Bouquet of Flowers",
-                          airportTransfer: "Airport Transfer",
+                          airportAssistance: "Airport Assistance",
                           wait: "Wait",
                         };
 

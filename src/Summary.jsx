@@ -20,7 +20,7 @@ const ContactSummaryCard = lazy(() =>
 }
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 import CarVitoIMG from "./assets/img/vehicles/vito.webp";
-import RideDetails from "./components/Landing/RideDetailsCard";
+import RideDetails from "./components/Summary/RideDetailsCard";
 import { useNavigate } from "react-router";
 
 {

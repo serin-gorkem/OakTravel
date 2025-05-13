@@ -1,7 +1,7 @@
 {
   /* React imports */
 }
-import { lazy, memo, useState } from "react";
+import { lazy, memo, useEffect, useState } from "react";
 
 {
   /* Lazy Loadings */
@@ -43,7 +43,7 @@ const Extras = memo(function () {
   );
   const [wait, setWait] = useState(localData.extras?.wait ?? false);
 
-  console.log(localData);
+  console.log(localData.extras);
 
   function setExtrasVariable() {
     setFormVariables({
@@ -57,25 +57,32 @@ const Extras = memo(function () {
     });
   }
 
+  useEffect(() => {
+    setExtrasVariable();
+  }, [airportAssistance, wait]);
+
   function handleAirportAssistance() {
     const newValue = !airportAssistance;
     setAirportAssistance(newValue);
     setExtrasVariable({
-      childSeatNumber,
-      flowersNumber,
-      airportAssistance: newValue,
-      wait,
+      ...localData,
+      extras: {
+        ...localData.extras,
+        airportAssistance : airportAssistance,
+      },
     });
+    console.log(localData.extras);
   }
   
   function handleWait() {
     const newValue = !wait;
     setWait(newValue);
     setExtrasVariable({
-      childSeatNumber,
-      flowersNumber,
-      airportAssistance,
-      wait: newValue,
+      ...localData,
+      extras: {
+        ...localData.extras,
+        wait : wait,
+      },
     });
   }
 

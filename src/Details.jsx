@@ -171,8 +171,8 @@ const Details = memo(function () {
                   />
                 </fieldset>
               </form>
-              <div className="w-fit flex gap-2 justify-between">
-                <button onClick={navigateToExtras} className="btn w-16 px-0 md:w-full btn-gray">
+              <div className="sm:w-fit flex justify-between">
+                <button onClick={navigateToExtras} className="btn w-[45%] sm:w-16 sm:px-0 md:w-full btn-gray">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -189,7 +189,7 @@ const Details = memo(function () {
                   </svg>
                   Extras
                 </button>
-                <button onClick={navigateToSummary} className="btn w-16 px-0 md:w-full btn-warning text-base-100">
+                <button onClick={navigateToSummary} className="btn w-[45%]  sm:w-16 md:w-full btn-warning text-base-100">
                   Booking Summary
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

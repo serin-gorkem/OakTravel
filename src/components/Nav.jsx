@@ -71,12 +71,13 @@ function PageNav(props) {
     >
       <ul className="flex flex-col md:flex-row md:justify-between gap-3 lg:p-0 lg:max-w-9/12 mx-auto w-full  ">
         <li className=" cursor-pointer">
-          <h1 className="text-primary text-3xl hover:text-warning transition-all ">
-            OAK TRAVEL
-          </h1>
+          <Link smooth to="/OakTravel/#home" aria-label={`Scroll to the main page.`}>
+            <h1 className="text-primary text-3xl hover:text-warning transition-all ">
+              OAK TRAVEL
+            </h1>
+          </Link>
         </li>
         <li className="flex items-center gap-4 w-fit cursor-pointer">
-
           <button
             aria-label="Book button"
             className="btn btn-primary w-30 lg:w-36 hover:bg-white hover:text-primary"
@@ -119,7 +120,11 @@ function MobileNav(props) {
         <div className="h-96 bg-base-100 flex flex-col sm:hidden">
           <ul className=" p-2 flex justify-between items-center">
             <li>
-              <Link to="/OakTravel">
+              <Link
+                smooth
+                to="/OakTravel/#home"
+                aria-label={`Scroll to the main page.`}
+              >
                 <h1 className="text-black text-xl hover:text-warning transition-all ">
                   OAK TRAVEL
                 </h1>
@@ -263,9 +268,15 @@ function BookingNav(props) {
       <div className="">
         <ul className="p-2 flex justify-between items-center">
           <li>
-            <a href="#">
-              <p className=" font-heading text-primary text-2xl">OAK TRAVEL</p>
-            </a>
+            <Link
+              smooth
+              to="/OakTravel/#home"
+              aria-label={`Scroll to the main page.`}
+            >
+              <h1 className="font-heading text-primary text-2xl ">
+                OAK TRAVEL
+              </h1>
+            </Link>
           </li>
           <li className="flex cursor-pointer items-center gap-4">
             <div className="dropdown">
@@ -318,7 +329,7 @@ function DesktopNav(props) {
     <nav className="hidden sm:flex sm:flex-col items-center z-20 gap-6 w-full lg:px-0 sm:px-4 xl:max-w-9/12 lg:max-w-11/12 mx-auto ">
       <ul className="flex justify-between w-full">
         <li>
-          <Link to="/OakTravel">
+          <Link to="/OakTravel/#home">
             <h1 className="text-base-100 text-3xl hover:text-warning transition-all ">
               OAK TRAVEL
             </h1>
