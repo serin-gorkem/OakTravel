@@ -54,24 +54,43 @@ const RideDetails = memo(function (props) {
           {localData?.extras && Object.keys(localData?.extras).length > 0 ? (
             <>
               <div className="flex flex-col">
-              <ul className="flex flex-wrap gap-2">
-                    <li>
-                      <p className="section-text font-bold">Child Seats: {props.localData.childSeatNumber}</p>
-                    </li>
-                    <li>
-                      <p className="section-text font-bold">Flowers: {props.localData.flowersNumber}</p>
-                    </li>
-                    {props.localData.airportTransfer && (
-                      <li>
-                        <p className="section-text font-bold">Airport Transfer {props.localData.airportTransfer}</p>
-                      </li>
+                <div className="flex flex-wrap gap-2">
+                {localData.extras &&
+            Object.keys(localData.extras).length > 0 ? (
+              <>
+                <div className="divider my-1"></div>
+                <div className="flex flex-col">
+                  <div className="flex flex-wrap gap-2">
+                    {Object.entries(localData.extras).map(
+                      ([key, value], index) => {
+                        const labelMap = {
+                          childSeatNumber: "Child Seat",
+                          flowersNumber: "Bouquet of Flowers",
+                          airportAssistance: "Airport Assistance",
+                          wait: "Extra Wait",
+                        };
+
+                        // Şart: Sadece true boolean ya da pozitif sayı olanlar gösterilecek
+                        const isTrueBoolean =
+                          typeof value === "boolean" && value;
+                        const isPositiveNumber =
+                          typeof value === "number" && value > 0;
+
+                        if (!isTrueBoolean && !isPositiveNumber) return null;
+
+                        return (
+                          <div key={index} className="section-text font-bold">
+                            {labelMap[key] || key}
+                            {isPositiveNumber ? `: ${value}` : ""}
+                          </div>
+                        );
+                      }
                     )}
-                    {props.localData.wait && (
-                      <li>
-                        <p className="section-text font-bold">Wait {props.localData.wait}</p>
-                      </li>
-                    )}
-                  </ul>
+                  </div>
+                </div>
+              </>
+            ) : null}
+                </div>
               </div>
             </>
           ) : null}

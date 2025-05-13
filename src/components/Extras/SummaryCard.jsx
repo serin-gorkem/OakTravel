@@ -78,7 +78,7 @@ const SummaryCard = memo(function (props) {
                           childSeatNumber: "Child Seat",
                           flowersNumber: "Bouquet of Flowers",
                           airportAssistance: "Airport Assistance",
-                          wait: "Wait",
+                          wait: "Extra Wait",
                         };
 
                         // Şart: Sadece true boolean ya da pozitif sayı olanlar gösterilecek
