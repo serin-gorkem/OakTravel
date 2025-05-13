@@ -116,11 +116,11 @@ const Extras = memo(function () {
   }
   const navigate = useNavigate();
   function navigateToVehicleFeatures(){
-    navigate("/OakTravel/vehicle-features");
+    navigate("/vehicle-features");
   }
 
   function navigateToPersonalDetails(){
-    navigate("/OakTravel/details");
+    navigate("/details");
   }
 
   return (

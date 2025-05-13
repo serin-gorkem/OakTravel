@@ -71,7 +71,7 @@ function PageNav(props) {
     >
       <ul className="flex flex-col md:flex-row md:justify-between gap-3 lg:p-0 lg:max-w-9/12 mx-auto w-full  ">
         <li className=" cursor-pointer">
-          <Link smooth to="/OakTravel/#home" aria-label={`Scroll to the main page.`}>
+          <Link smooth to="/#home" aria-label={`Scroll to the main page.`}>
             <h1 className="text-primary text-3xl hover:text-warning transition-all ">
               OAK TRAVEL
             </h1>
@@ -122,7 +122,7 @@ function MobileNav(props) {
             <li>
               <Link
                 smooth
-                to="/OakTravel/#home"
+                to="/#home"
                 aria-label={`Scroll to the main page.`}
               >
                 <h1 className="text-black text-xl hover:text-warning transition-all ">
@@ -270,7 +270,7 @@ function BookingNav(props) {
           <li>
             <Link
               smooth
-              to="/OakTravel/#home"
+              to="/#home"
               aria-label={`Scroll to the main page.`}
             >
               <h1 className="font-heading text-primary text-2xl ">
@@ -329,7 +329,7 @@ function DesktopNav(props) {
     <nav className="hidden sm:flex sm:flex-col items-center z-20 gap-6 w-full lg:px-0 sm:px-4 xl:max-w-9/12 lg:max-w-11/12 mx-auto ">
       <ul className="flex justify-between w-full">
         <li>
-          <Link to="/OakTravel/#home">
+          <Link to="/#home">
             <h1 className="text-base-100 text-3xl hover:text-warning transition-all ">
               OAK TRAVEL
             </h1>

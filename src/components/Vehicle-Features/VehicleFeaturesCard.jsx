@@ -28,7 +28,7 @@ const VehicleFeaturesCard = memo(function (props) {
 
   const navigate = useNavigate();
   function navigateToExtras(){
-    navigate("/OakTravel/extras");
+    navigate("/extras");
   }
 
 

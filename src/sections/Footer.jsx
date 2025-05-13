@@ -19,11 +19,11 @@ const Footer = memo(function () {
             Browse
           </h1>
           <ul className="text-base-100 w-full">
-            {menuItem("Home", "/OakTravel/#home")}
-            {menuItem("About Us", "/OakTravel/#about")}
-            {menuItem("FAQ", "/OakTravel/#FAQ")}
-            {menuItem("How to book your ride", "/OakTravel/#steps")}
-            {menuItem("Contact", "/OakTravel/#Contact")}
+            {menuItem("Home", "/#home")}
+            {menuItem("About Us", "/#about")}
+            {menuItem("FAQ", "/#FAQ")}
+            {menuItem("How to book your ride", "/#steps")}
+            {menuItem("Contact", "/#Contact")}
           </ul>
         </nav>
         <nav>

@@ -38,7 +38,7 @@ const Details = memo(function () {
 
     const navigate = useNavigate();
     function navigateToExtras(){
-      navigate("/OakTravel/extras");
+      navigate("/extras");
     }
 
     function navigateToSummary(){
@@ -51,7 +51,7 @@ const Details = memo(function () {
         email: email,
         message: message,
       });
-      navigate("/OakTravel/summary");
+      navigate("/summary");
     }
 
   return (

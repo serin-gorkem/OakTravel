@@ -8,27 +8,27 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
-    path: "/OakTravel",
+    path: "/",
     element: <Landing />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/OakTravel/vehicle-features",
+    path: "/vehicle-features",
     element: <VehicleFeatures />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/OakTravel/extras",
+    path: "/extras",
     element: <Extras />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/OakTravel/details",
+    path: "/details",
     element: <Details />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/OakTravel/summary",
+    path: "/summary",
     element: <Summary />,
     errorElement: <ErrorPage />,
   },

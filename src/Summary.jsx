@@ -32,7 +32,7 @@ const Summary = memo(function () {
       const navigate = useNavigate();
   
       function navigateToDetails(){
-        navigate("/OakTravel/details");
+        navigate("/details");
       }
   return (
     <>
