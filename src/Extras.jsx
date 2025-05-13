@@ -1,7 +1,7 @@
 {
   /* React imports */
 }
-import { lazy, memo } from "react";
+import { lazy, memo, useState } from "react";
 
 {
   /* Lazy Loadings */
@@ -11,6 +11,7 @@ const Nav = lazy(() => import("./components/Nav"));
 const Steps = lazy(() => import("./sections/Steps"));
 const PageIndicator = lazy(() => import("./components/PageIndicator"));
 const SummaryCard = lazy(() => import("./components/Extras/SummaryCard"));
+import useFormVariables from "./hooks/useGetLocalVariables";
 
 {
   /* API Keys and images import */
@@ -19,11 +20,102 @@ import { APIProvider, Map } from "@vis.gl/react-google-maps";
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 import CarVitoIMG from "./assets/img/vehicles/vito.webp";
 import ExtrasCard from "./components/Extras/ExtrasCard";
+import { useNavigate } from "react-router";
 
 {
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
 }
 const Extras = memo(function () {
+  //Get local variables
+  const { setFormVariables, getFormVariables } = useFormVariables();
+  const localData = getFormVariables();
+
+  const [childSeatNumber, setChildSeatNumber] = useState(
+    localData.extras?.childSeatNumber ?? 0
+  );
+  
+  const [flowersNumber, setFlowersNumber] = useState(
+    localData.extras?.flowersNumber ?? 0
+  );
+
+  const [airportAssistance, setAirportAssistance] = useState(
+    localData.extras?.airportAssistance ?? false
+  );
+  const [wait, setWait] = useState(localData.extras?.wait ?? false);
+
+  console.log(localData);
+
+  function setExtrasVariable() {
+    setFormVariables({
+      ...localData,
+      extras: {
+        childSeatNumber,
+        flowersNumber,
+        airportAssistance,
+        wait,
+      },
+    });
+  }
+
+  function handleAirportAssistance() {
+    const newValue = !airportAssistance;
+    setAirportAssistance(newValue);
+    setExtrasVariable({
+      childSeatNumber,
+      flowersNumber,
+      airportAssistance: newValue,
+      wait,
+    });
+  }
+  
+  function handleWait() {
+    const newValue = !wait;
+    setWait(newValue);
+    setExtrasVariable({
+      childSeatNumber,
+      flowersNumber,
+      airportAssistance,
+      wait: newValue,
+    });
+  }
+
+  function increase(type) {
+    switch (true) {
+      case type === "child-seat" && childSeatNumber < 2:
+        setChildSeatNumber(childSeatNumber + 1);
+        break;
+
+      case type === "flowers" && flowersNumber < 3:
+        setFlowersNumber(flowersNumber + 1);
+        break;
+
+      default:
+        break;
+    }
+  }
+  function decrease(type) {
+    switch (true) {
+      case type === "child-seat" && childSeatNumber > 0:
+        setChildSeatNumber(childSeatNumber - 1);
+        break;
+
+      case type === "flowers" && flowersNumber > 0:
+        setFlowersNumber(flowersNumber - 1);
+        break;
+
+      default:
+        break;
+    }
+  }
+  const navigate = useNavigate();
+  function navigateToVehicleFeatures(){
+    navigate("/OakTravel/vehicle-features");
+  }
+
+  function navigateToPersonalDetails(){
+    navigate("/OakTravel/details");
+  }
+
   return (
     <>
       <Nav isBookingPage={true} />
@@ -32,31 +124,30 @@ const Extras = memo(function () {
           <div className="lg:hidden block">
             {/* Use switch case to change the page indicator */}
             <PageIndicator activePage={"Details"} />
-            <ExtrasCard />
+            <ExtrasCard
+              increase={increase}
+              decrease={decrease}
+              setExtrasVariable={setExtrasVariable}
+              childSeatNumber={childSeatNumber}
+              flowersNumber={flowersNumber}
+              handleAirportAssistance = {handleAirportAssistance}
+              handleWait = {handleWait}
+            />
           </div>
           <aside className="flex flex-col gap-3 xl:w-4/12 lg:w-5/12">
             <SummaryCard
+              localData={localData}
               showItems={true}
               img={CarVitoIMG}
-              title={"Transfer Details"}
               transferType={"ONE WAY"}
               vehicleType={"Mercedes Vito"}
-              pickupLocation={
-                "Milas–Bodrum Airport (BJV), Bodrum Airport Street, Ekinanbarı, Milas/Muğla"
-              }
-              dropOffLocation={
-                "Adnan Menderes Havalimanı, Dokuz Eylül, Gaziemir/İzmir"
-              }
-              pickupTime={"13:45 (1:45 pm)"}
-              pickupDate={"03 March 2025"}
-              pickupPerson={"2"}
               totalDistance={"370 km"}
               totalTime={"2h 18m"}
               totalPrice={"219.34 $"}
             />
             {/* Navigation Buttons */}
             <div className="flex md:flex-wrap gap-2 justify-between w-full">
-              <button className="btn w-5/12 px-0 md:w-full btn-gray">
+              <button onClick={navigateToVehicleFeatures} className="btn w-5/12 px-0 md:w-full btn-gray">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -73,7 +164,7 @@ const Extras = memo(function () {
                 </svg>
                 Vehicle Features
               </button>
-              <button className="btn w-5/12 px-0 md:w-full btn-warning text-base-100">
+              <button onClick={navigateToPersonalDetails} className="btn w-5/12 px-0 md:w-full btn-warning text-base-100">
                 Personal Details
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -95,8 +186,16 @@ const Extras = memo(function () {
           <div className="lg:w-full flex flex-col gap-4">
             <div className="hidden lg:flex lg:flex-col lg:gap-4">
               {/*For page indicator active functionality, later.*/}
-              <PageIndicator active ={"Details"} />
-              <ExtrasCard />
+              <PageIndicator active={"Details"} />
+              <ExtrasCard
+                increase={increase}
+                decrease={decrease}
+                setExtrasVariable={setExtrasVariable}
+                childSeatNumber={childSeatNumber}
+                flowersNumber={flowersNumber}
+                handleAirportAssistance = {handleAirportAssistance}
+                handleWait = {handleWait}
+              />
             </div>
           </div>
         </section>

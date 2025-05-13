@@ -29,18 +29,18 @@ import {
   Polyline,
 } from "@react-google-maps/api";
 
+import useFormVariables from "./hooks/useGetLocalVariables";
+
+
 {
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
 }
 const VehicleFeatures = memo(function () {
-  let savedVariables;
-  try {
-    const data = localStorage.getItem("formVariables");
-    savedVariables = data ? JSON.parse(data) : {};
-  } catch (error) {
-    console.error("Error parsing formVariables from localStorage:", error);
-    savedVariables = {};
-  }
+  window.scrollTo(0, 0);
+
+  const { getFormVariables } = useFormVariables();
+  const localData = getFormVariables();
+  
   const libraries = ["places","geometry"];
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -56,13 +56,13 @@ const VehicleFeatures = memo(function () {
   };
 
   const center = {
-      lat: savedVariables.pickupLocation?.lat || 0,
-      lng: savedVariables.pickupLocation?.lng || 0,
+      lat: localData.pickupLocation?.lat || 0,
+      lng: localData.pickupLocation?.lng || 0,
   };
   
   const positions = [
-      { lat: savedVariables.pickupLocation?.lat || 0, lng: savedVariables.pickupLocation?.lng || 0 },
-      { lat: savedVariables.dropOffLocation?.lat || 0, lng: savedVariables.dropOffLocation?.lng || 0 },
+      { lat: localData.pickupLocation?.lat || 0, lng: localData.pickupLocation?.lng || 0 },
+      { lat: localData.dropOffLocation?.lat || 0, lng: localData.dropOffLocation?.lng || 0 },
   ];
 
   function haversineDistance(lat1, lon1, lat2, lon2) {
@@ -87,10 +87,10 @@ const VehicleFeatures = memo(function () {
   }
   
   // Kullanım:
-  const lat1 = savedVariables?.pickupLocation?.lat || 0;
-  const lon1 = savedVariables?.pickupLocation?.lng || 0;
-  const lat2 = savedVariables?.dropOffLocation?.lat || 0;
-  const lon2 = savedVariables?.dropOffLocation?.lng || 0;
+  const lat1 = localData?.pickupLocation?.lat || 0;
+  const lon1 = localData?.pickupLocation?.lng || 0;
+  const lat2 = localData?.dropOffLocation?.lat || 0;
+  const lon2 = localData?.dropOffLocation?.lng || 0;
   
   const distance = haversineDistance(lat1, lon1, lat2, lon2);
   const flightDuration = estimateFlightTime(distance);
@@ -176,8 +176,8 @@ const VehicleFeatures = memo(function () {
                     d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
                   />
                 </svg>
-                <a href= {`${import.meta.env.VITE_WHATSAPP_PHONE}`} className="text-xs lg:text-base">
-                  {`${import.meta.env.VITE_WHATSAPP_PHONE}`}
+                <a href= {`${import.meta.env.VITE_WHATSAPP_PHONE_NUMBER}`} className="text-xs lg:text-base">
+                  {`${import.meta.env.VITE_WHATSAPP_PHONE_NUMBER}`}
                 </a>
               </div>
               <div className="divider my-2"></div>
@@ -205,6 +205,7 @@ const VehicleFeatures = memo(function () {
                 </GoogleMap>
               )}
             </div>
+            {/*Price from the database should be passed here.*/}
             <VehicleFeaturesCard
               img={CarVitoIMG}
               vehicleName={"Mercedes Vito"}

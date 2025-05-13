@@ -12,7 +12,6 @@ const Footer = lazy(() => import("./sections/Footer"));
 const PageDivider = lazy(() => import("./components/PageDivider"));
 
 const Landing = memo(function Landing() {
-
   const whatsappIcon = (
     <a
       href="https://api.whatsapp.com/send?phone=905540161923"

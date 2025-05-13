@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import  { useLandingPageFormState } from "../../hooks/useLandingPageFormState";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
+import useFormVariables from "../../hooks/useGetLocalVariables";
 import {
   Autocomplete,
   useJsApiLoader,
@@ -95,7 +96,7 @@ const LandingPageForm = memo(function () {
     }),
     []
   );
-  const DropoOffoptions = useMemo(
+  const DropOffOptions = useMemo(
     () => ({
       componentRestrictions: { country: "tr" },
     }),
@@ -148,28 +149,26 @@ const LandingPageForm = memo(function () {
     }
     return true;
   };
-
-  const saveFormVariables = () => {
-    const variables = {
-      pickupLocation,
-      dropOffLocation,
-      pickupDate,
-      pickupHour,
-      passengerCount,
-      shouldShowReturnUI: !shouldShowReturnUI,
-      returnDate,
-      returnHour,
-      returnPassengerCount,
-    };
-    localStorage.setItem("formVariables", JSON.stringify(variables));
-  };
-
+  
+  const { setFormVariables } = useFormVariables();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
-    saveFormVariables();
+    setFormVariables(
+      {
+        pickupLocation,
+        dropOffLocation,
+        pickupDate,
+        pickupHour,
+        passengerCount,
+        shouldShowReturnUI,
+        returnDate,
+        returnHour,
+        returnPassengerCount,
+      }
+    )
     navigate("vehicle-features");
   };
   const autocompletePickupRef = useRef(null);
@@ -189,11 +188,7 @@ const LandingPageForm = memo(function () {
       name: place.name,
       address: place.formatted_address
     });
-    console.log(place.formatted_address);
-    console.log(location.lat());
-    console.log(location.lng());
   };
-
 
   return (
     <>
@@ -283,7 +278,7 @@ const LandingPageForm = memo(function () {
               <Autocomplete
                     onLoad={(ref) => (autocompleteDropRef.current = ref)}
                     onPlaceChanged={() =>handlePlaceChanged(autocompleteDropRef,setDropOffLocation)}
-                    options={DropoOffoptions}
+                    options={DropOffOptions}
                   >
                     <input
                     type="text"

@@ -1,7 +1,8 @@
 {
   /* React imports */
 }
-import { lazy, memo } from "react";
+import { lazy, memo, useState } from "react";
+import useFormVariables from "./hooks/useGetLocalVariables";
 
 {
   /* Lazy Loadings */
@@ -17,11 +18,42 @@ const SummaryCard = lazy(() => import("./components/Extras/SummaryCard"));
 }
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 import CarVitoIMG from "./assets/img/vehicles/vito.webp";
+import { useNavigate } from "react-router";
 
 {
   /* On Form.jsx, there is a submit button and it will push form information to this jsx file and it will be used in Transfer Card  */
 }
 const Details = memo(function () {
+    //Get local variables
+    const { setFormVariables, getFormVariables } = useFormVariables();
+    const localData = getFormVariables();
+
+    const [firstName,setFirstName] = useState(localData?.firstName ?? "");
+    const [lastName,setLastName] = useState(localData?.lastName ?? "");
+    const [phone,setPhone] = useState(localData?.phone ?? "");
+    const [flightNumber,setFlightNumber] = useState(localData?.flightNumber ?? "");
+    const [email,setEmail] = useState(localData?.email ?? "");
+    const [message,setMessage] = useState(localData?.message ?? "");
+
+
+    const navigate = useNavigate();
+    function navigateToExtras(){
+      navigate("/OakTravel/extras");
+    }
+
+    function navigateToSummary(){
+      setFormVariables({
+        ...localData,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        flightNumber: flightNumber,
+        email: email,
+        message: message,
+      });
+      navigate("/OakTravel/summary");
+    }
+
   return (
     <>
       <Nav isBookingPage={true} />
@@ -29,22 +61,12 @@ const Details = memo(function () {
         <section className="p-4 md:px-4 flex justify-between flex-col-reverse lg:flex-row-reverse gap-4 w-full lg:px-0 ">
           <aside className="flex flex-col gap-3 xl:w-4/12 lg:w-5/12">
             <SummaryCard
+              localData={localData}
               showItems={true}
-              isDetailsPage={true}
-              extras={["Baby Seat", "Child Seat"]}
               img={CarVitoIMG}
               title={"Transfer Details"}
               transferType={"ONE WAY"}
               vehicleType={"Mercedes Vito"}
-              pickupLocation={
-                "Milas–Bodrum Airport (BJV), Bodrum Airport Street, Ekinanbarı, Milas/Muğla"
-              }
-              dropOffLocation={
-                "Adnan Menderes Havalimanı, Dokuz Eylül, Gaziemir/İzmir"
-              }
-              pickupTime={"13:45 (1:45 pm)"}
-              pickupDate={"03 March 2025"}
-              pickupPerson={"2"}
               totalDistance={"370 km"}
               totalTime={"2h 18m"}
               totalPrice={"219.34 $"}
@@ -65,6 +87,8 @@ const Details = memo(function () {
                     <input
                       type="text"
                       id="name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                       autoComplete="given-name"
                       className="bg-base-300 h-10 p-2 w-full shadow-sm lg:text-base"
                       placeholder="First Name"
@@ -78,6 +102,8 @@ const Details = memo(function () {
                     <input
                       type="text"
                       id="name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                       autoComplete="family-name"
                       className="bg-base-300 h-10 w-full p-2 shadow-sm lg:text-base"
                       placeholder="Last Name"
@@ -92,6 +118,8 @@ const Details = memo(function () {
                   <input
                     type="text"
                     id="name"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     autoComplete="tel"
                     className="bg-base-300 h-10 p-2 w-full shadow-sm lg:text-base"
                     placeholder="+00 000 000 00 00"
@@ -106,6 +134,8 @@ const Details = memo(function () {
                   <input
                     type="text"
                     id="name"
+                    value={flightNumber}
+                    onChange={(e) => setFlightNumber(e.target.value)}
                     autoComplete="number"
                     className="bg-base-300 h-10 p-2 w-full shadow-sm lg:text-base"
                     placeholder="AA1234"
@@ -119,6 +149,8 @@ const Details = memo(function () {
                   <input
                     type="text"
                     id="name"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
                     className="bg-base-300 h-10 w-full p-2 shadow-sm lg:text-base"
                     placeholder="Email"
@@ -131,6 +163,8 @@ const Details = memo(function () {
                   </legend>
                   <textarea
                     id="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     className="bg-base-300 h-32 w-full p-2 shadow-sm lg:text-base"
                     placeholder="Leave us a message..."
                     required
@@ -138,7 +172,7 @@ const Details = memo(function () {
                 </fieldset>
               </form>
               <div className="w-fit flex gap-2 justify-between">
-                <button className="btn w-16 px-0 md:w-full btn-gray">
+                <button onClick={navigateToExtras} className="btn w-16 px-0 md:w-full btn-gray">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -155,7 +189,7 @@ const Details = memo(function () {
                   </svg>
                   Extras
                 </button>
-                <button className="btn w-16 px-0 md:w-full btn-warning text-base-100">
+                <button onClick={navigateToSummary} className="btn w-16 px-0 md:w-full btn-warning text-base-100">
                   Booking Summary
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

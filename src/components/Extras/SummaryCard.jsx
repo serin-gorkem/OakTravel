@@ -5,9 +5,9 @@ const SummaryCard = memo(function (props) {
     <article className="bg-base-300 rounded-box shadow-md flex gap-4 flex-col px-3 py-4 ">
       <img src={props.img} className="w-full"></img>
       <div>
-        {props.showItems ? (
+        {props.localData ? (
           <>
-            <h1 className="text-2xl md:text-4xl my-3"> {props.title} </h1>
+            <h1 className="text-2xl md:text-4xl my-3">Transfer Details</h1>
             <div className="flex flex-col">
               <h2 className="title mb-1">TRANSFER TYPE</h2>
               <p className="section-text font-bold">{props.transferType}</p>
@@ -20,35 +20,83 @@ const SummaryCard = memo(function (props) {
             <div className="divider my-1"></div>
             <div className="flex flex-col">
               <h2 className="title mb-1">PICKUP LOCATION</h2>
-              <p className="section-text font-bold">{props.pickupLocation}</p>
+              <p className="section-text font-bold">
+                {props.localData.pickupLocation.name}
+              </p>
             </div>
             <div className="divider my-1"></div>
             <div className="flex flex-col">
               <h2 className="title mb-1">DROP OFF LOCATION</h2>
-              <p className="section-text font-bold">{props.dropOffLocation}</p>
+              <p className="section-text font-bold">
+                {props.localData.dropOffLocation.name}
+              </p>
             </div>
             <div className="divider my-1"></div>
             <div className="flex flex-col">
               <h2 className="title mb-1">PICKUP DATE, TIME</h2>
               <div className="flex flex-wrap gap-2">
-                <p className="section-text font-bold">{props.pickupTime}</p>
-                <p className="section-text font-bold">{props.pickupDate}</p>
                 <p className="section-text font-bold">
-                  {props.pickupPerson} Person
+                  {props.localData.passengerCount} Person /
+                </p>
+                <p className="section-text font-bold">
+                  {props.localData.pickupDate} /{" "}
+                </p>
+                <p className="section-text font-bold">
+                  {props.localData.pickupHour}
                 </p>
               </div>
             </div>
-            {props.isDetailsPage && props.extras ? (
+            {props.localData.shouldShowReturnUI == true && (
+              <>
+                <div className="divider my-1"></div>
+                <div className="flex flex-col">
+                  <h2 className="title mb-1">RETURN DATE, TIME</h2>
+                  <div className="flex flex-wrap gap-2">
+                    <p className="section-text font-bold">
+                      {props.localData.passengerCount} Person /
+                    </p>
+                    <p className="section-text font-bold">
+                      {props.localData.returnDate} /{" "}
+                    </p>
+                    <p className="section-text font-bold">
+                      {props.localData.returnHour}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+            {props.localData.extras &&
+            Object.keys(props.localData.extras).length > 0 ? (
               <>
                 <div className="divider my-1"></div>
                 <div className="flex flex-col">
                   <h2 className="title mb-1">Extras</h2>
                   <div className="flex flex-wrap gap-2">
-                    {props.extras.map((extra, index) => (
-                      <div key={index} className="section-text font-bold">
-                        {extra}
-                      </div>
-                    ))}
+                    {Object.entries(props.localData.extras).map(
+                      ([key, value], index) => {
+                        const labelMap = {
+                          childSeatNumber: "Child Seat",
+                          flowersNumber: "Bouquet of Flowers",
+                          airportTransfer: "Airport Transfer",
+                          wait: "Wait",
+                        };
+
+                        // Şart: Sadece true boolean ya da pozitif sayı olanlar gösterilecek
+                        const isTrueBoolean =
+                          typeof value === "boolean" && value;
+                        const isPositiveNumber =
+                          typeof value === "number" && value > 0;
+
+                        if (!isTrueBoolean && !isPositiveNumber) return null;
+
+                        return (
+                          <div key={index} className="section-text font-bold">
+                            {labelMap[key] || key}
+                            {isPositiveNumber ? `: ${value}` : ""}
+                          </div>
+                        );
+                      }
+                    )}
                   </div>
                 </div>
               </>
@@ -89,5 +137,4 @@ const SummaryCard = memo(function (props) {
     </article>
   );
 });
-
 export default SummaryCard;

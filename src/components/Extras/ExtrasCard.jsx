@@ -1,36 +1,6 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 
-const ExtrasCard = memo(function () {
-  const [childSeatNumber, setChildSeatNumber] = useState(0);
-  const [flowersNumber, setFlowersNumber] = useState(0);
-  function increase(type) {
-    switch (true) {
-      case type === "child-seat" && childSeatNumber < 2:
-        setChildSeatNumber(childSeatNumber + 1);
-        break;
-
-      case type === "flowers" && flowersNumber < 3:
-        setFlowersNumber(flowersNumber + 1);
-        break;
-
-      default:
-        break;
-    }
-  }
-  function decrease(type) {
-    switch (true) {
-      case type === "child-seat" && childSeatNumber > 0:
-        setChildSeatNumber(childSeatNumber - 1);
-        break;
-
-      case type === "flowers" && flowersNumber > 0:
-        setFlowersNumber(flowersNumber - 1);
-        break;
-
-      default:
-        break;
-    }
-  }
+const ExtrasCard = memo(function (props) {
   return (
     <article className="bg-base-300 rounded-box shadow-md flex gap-4 flex-col px-3 py-4 ">
       <figure className="flex gap-2 lg:gap-4">
@@ -68,11 +38,11 @@ const ExtrasCard = memo(function () {
             <div className="flex justify-between w-full md:w-64 rounded-box h-fit border-2 border-[#B9B9B9]">
               <div className="p-3">
                 <h3>Number</h3>
-                <p>{childSeatNumber}</p>
+                <p>{props.childSeatNumber}</p>
               </div>
               <div>
                 <div
-                  onClick={() => increase("child-seat")}
+                  onClick={() => props.increase("child-seat")}
                   className="border-l-2 cursor-pointer border-b-2 active:bg-base-100 border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -91,7 +61,7 @@ const ExtrasCard = memo(function () {
                   </svg>
                 </div>
                 <div
-                  onClick={() => decrease("child-seat", 1)}
+                  onClick={() => props.decrease("child-seat", 1)}
                   className="border-l-2 cursor-pointer active:bg-base-100 border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -111,7 +81,10 @@ const ExtrasCard = memo(function () {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary w-1/2 md:w-3/12 px-16">
+            <button
+              onClick={props.setExtrasVariable}
+              className="btn btn-primary w-1/2 md:w-3/12 px-16"
+            >
               Select
             </button>
           </div>
@@ -129,11 +102,11 @@ const ExtrasCard = memo(function () {
             <div className="flex justify-between w-full md:w-64 rounded-box h-fit border-2 border-[#B9B9B9]">
               <div className="p-3">
                 <h3>Number</h3>
-                <p>{flowersNumber}</p>
+                <p>{props.flowersNumber}</p>
               </div>
               <div>
                 <div
-                  onClick={() => increase("flowers")}
+                  onClick={() => props.increase("flowers")}
                   className="border-l-2 cursor-pointer border-b-2 border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -152,7 +125,7 @@ const ExtrasCard = memo(function () {
                   </svg>
                 </div>
                 <div
-                  onClick={() => decrease("flowers", 1)}
+                  onClick={() => props.decrease("flowers", 1)}
                   className="border-l-2 cursor-pointer border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -172,7 +145,10 @@ const ExtrasCard = memo(function () {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary w-1/2 md:w-3/12 px-16">
+            <button
+              onClick={props.setExtrasVariable}
+              className="btn btn-primary w-1/2 md:w-3/12 px-16"
+            >
               Select
             </button>
           </div>
@@ -188,8 +164,8 @@ const ExtrasCard = memo(function () {
           {/*Button Box Container */}
           <div className="flex flex-col md:flex-row gap-2 md:w-fit justify-between md:items-center">
             {/* Numbers Box */}
-            <button className="btn btn-primary w-1/2 md:w-3/12 px-16">
-              Select
+            <button onClick={props.handleAirportAssistance} className="btn">
+              Select Airport Assistance
             </button>
           </div>
         </fieldset>
@@ -205,7 +181,10 @@ const ExtrasCard = memo(function () {
           {/*Button Box Container */}
           <div className="flex flex-col md:flex-row gap-2 md:w-fit justify-between md:items-center">
             {/* Numbers Box */}
-            <button className="btn btn-primary w-1/2 md:w-3/12 px-16">
+            <button
+              onClick={props.handleWait}
+              className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
+            >
               Select
             </button>
           </div>
@@ -226,11 +205,11 @@ const ExtrasCard = memo(function () {
             <div className="border-x-2 border-[#B9B9B9] flex h-full ">
               <div className="p-3">
                 <h3 className="text-base opacity-70">Number</h3>
-                <p className="text-lg">{childSeatNumber}</p>
+                <p className="text-lg">{props.childSeatNumber}</p>
               </div>
               <div className="flex flex-col justify-between">
                 <div
-                  onClick={() => increase("child-seat")}
+                  onClick={() => props.increase("child-seat")}
                   className="border-l-2 cursor-pointer hover:bg-base-100 border-b-2 border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -249,7 +228,7 @@ const ExtrasCard = memo(function () {
                   </svg>
                 </div>
                 <div
-                  onClick={() => decrease("child-seat", 1)}
+                  onClick={() => props.decrease("child-seat", 1)}
                   className="border-l-2 cursor-pointer hover:bg-base-100 border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -269,7 +248,10 @@ const ExtrasCard = memo(function () {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16">
+            <button
+              onClick={props.setExtrasVariable}
+              className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
+            >
               Select
             </button>
           </div>
@@ -287,11 +269,11 @@ const ExtrasCard = memo(function () {
             <div className="border-x-2 border-[#B9B9B9] flex h-full ">
               <div className="p-3">
                 <h3 className="text-base opacity-70">Number</h3>
-                <p className="text-lg">{flowersNumber}</p>
+                <p className="text-lg">{props.flowersNumber}</p>
               </div>
               <div className="flex flex-col justify-between">
                 <div
-                  onClick={() => increase("flowers")}
+                  onClick={() => props.increase("flowers")}
                   className="border-l-2 cursor-pointer hover:bg-base-100 border-b-2 border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -310,7 +292,7 @@ const ExtrasCard = memo(function () {
                   </svg>
                 </div>
                 <div
-                  onClick={() => decrease("flowers", 1)}
+                  onClick={() => props.decrease("flowers", 1)}
                   className="border-l-2 cursor-pointer hover:bg-base-100 border-[#B9B9B9] p-2"
                 >
                   <svg
@@ -330,7 +312,10 @@ const ExtrasCard = memo(function () {
                 </div>
               </div>
             </div>
-            <button className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16">
+            <button
+              onClick={props.setExtrasVariable}
+              className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
+            >
               Select
             </button>
           </div>
@@ -346,8 +331,11 @@ const ExtrasCard = memo(function () {
             </label>
           </div>
           <div className="flex items-center justify-center gap-4">
-            <div className="divider divider-horizontal "></div>
-            <button className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16">
+            <div className="divider divider-horizontal"></div>
+            <button
+              onClick={props.handleAirportAssistance}
+              className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
+            >
               Select
             </button>
           </div>
@@ -365,13 +353,15 @@ const ExtrasCard = memo(function () {
           </div>
           <div className="flex items-center justify-center gap-4">
             <div className="divider divider-horizontal "></div>
-            <button className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16">
+            <button
+              onClick={props.handleWait}
+              className="btn btn-primary hover:bg-base-300 hover:text-primary w-2/12 px-16"
+            >
               Select
             </button>
           </div>
         </fieldset>
       </form>
-
     </article>
   );
 });

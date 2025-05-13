@@ -1,4 +1,6 @@
 import { memo } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const VehicleFeaturesCard = memo(function (props) {
   const featuresList = props.features.map((feature,index) => {
@@ -23,6 +25,13 @@ const VehicleFeaturesCard = memo(function (props) {
       </li>
     );
   });
+
+  const navigate = useNavigate();
+  function navigateToExtras(){
+    navigate("/OakTravel/extras");
+  }
+
+
   return (
     <article className="bg-base-300 rounded-box shadow-md flex gap-4 flex-col p-2 ">
       <img src={props.img} className="lg:w-1/3 w-1/2"></img>
@@ -112,7 +121,7 @@ const VehicleFeaturesCard = memo(function (props) {
           <p>Free Cancellation</p>
         </div>
       </div>
-      <button className="btn btn-warning w-36 text-base-100">SELECT</button>
+      <button onClick={navigateToExtras} className="btn btn-warning w-36 text-base-100">SELECT</button>
     </article>
   );
 });
