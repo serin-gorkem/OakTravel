@@ -41,7 +41,8 @@ const Details = memo(function () {
       navigate("/extras");
     }
 
-    function handleSubmit(){
+    function handleSubmit(e){
+      e.preventDefault();
       setFormVariables({
         ...localData,
         firstName: firstName,
